@@ -39,7 +39,7 @@ const products = [
   {
     title: 'Catnip',
     description: 'Cats love it!',
-    price: '3.99',
+    price: 3.99,
     quantity: 100,
     image:
       'https://image.petmd.com/files/styles/article_image/public/2020-11/picture-of-catnip.jpg?VersionId=Kb2rnqmWlgZH6oXcbEIeZ.4DH9DPmJ0o&itok=m6TAYZXT',
@@ -48,7 +48,7 @@ const products = [
     title: 'Calathea Orbifolia',
     description:
       'The Calathea Orbifolia’s broad, oval-shaped leaves with contrasting green stripes make it a popular plant for home decor and plant enthusiasts alike. Its lush foliage benefits from frequent waterings and high humidity. In ideal conditions (think tropical), its pet-friendly leaves can grow over a foot wide!',
-    price: '36.00',
+    price: 36.0,
     quantity: 100,
     image:
       'https://cdn.shopify.com/s/files/1/1811/2867/products/Prayer_Plant_6_WP_1800x1800.jpg?v=1581352556',
@@ -57,7 +57,7 @@ const products = [
     title: 'Bromeliad Antonio Pink',
     description:
       'The “pink” in Bromeliad Antonio Pink describes the fuchsia bracts found in this cultivar, which sometimes produce short-blooming purple flowers. Its vibrant bract also gives it its nickname, the Pink Quill Plant.',
-    price: '56.00',
+    price: 56.5,
     quantity: 100,
     image:
       'https://bloomscape.com/wp-content/uploads/2021/09/bloomscape_bromeliad-summer_small_slate.jpg?ver=596856',
