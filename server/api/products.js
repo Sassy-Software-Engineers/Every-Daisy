@@ -8,16 +8,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      include: [
-        {
-          model: Review,
-          as: 'reviews',
-        },
-        {
-          model: Category,
-          as: 'category',
-        },
-      ],
+      include: [Review, Category],
     });
 
     res.json(products);
@@ -29,16 +20,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:productId', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId, {
-      include: [
-        {
-          model: Review,
-          as: 'reviews',
-        },
-        {
-          model: Category,
-          as: 'category',
-        },
-      ],
+      include: [Review, Category],
     });
     res.json(product);
   } catch (e) {
