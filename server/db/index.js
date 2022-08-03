@@ -9,11 +9,14 @@ const Category = require('./models/Category');
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
 User.hasMany(Review);
 Review.belongsTo(User);
+
 Review.belongsTo(Product);
 Product.hasMany(Review);
-Category.hasMany(Product, { through: 'product_categories' });
+
+Category.belongsToMany(Product, { through: 'product_categories' });
 Product.belongsToMany(Category, { through: 'product_categories' });
 
 module.exports = {
