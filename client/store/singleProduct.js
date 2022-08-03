@@ -5,7 +5,6 @@ import axios from 'axios';
  */
 const GET_PRODUCT = 'GET_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-
 /**
  * ACTION CREATORS
  */
