@@ -33,6 +33,13 @@ const User = db.define('user', {
       notEmpty: true,
     },
   },
+  status: {
+    allowNull: false,
+    defaultValue: 'MEMBER',
+    validate: {
+      isIn: [['MEMBER', 'ADMIN']],
+    },
+  },
 });
 
 module.exports = User;
