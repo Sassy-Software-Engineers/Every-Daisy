@@ -34,6 +34,7 @@ const User = db.define('user', {
     },
   },
   status: {
+    type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'MEMBER',
     validate: {
