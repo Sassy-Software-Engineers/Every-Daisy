@@ -38,3 +38,5 @@ const Product = db.define('Product', {
       'https://st.depositphotos.com/1055085/3389/i/600/depositphotos_33897773-stock-photo-artificial-tree.jpg',
   },
 });
+
+module.exports = Product;
