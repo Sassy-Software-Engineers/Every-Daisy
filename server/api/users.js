@@ -10,11 +10,13 @@ router.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'name', 'address']
     })
-    res.json(users)
+    res.json(users);
   } catch (error) {
     next(error)
   }
 })
+
+router.post("/")
 
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -24,7 +26,17 @@ router.get('/:userId', async (req, res, next) => {
       attributes: ['id', 'name', 'address'],
       include: { model: Order}
     });
-    res.json(user)
+    res.json(user);
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put("/:userId", async (req, res, next) => {
+  try{
+    const user = await User.findByPk(req.params.userId);
+    const updated = await user.update(req.body);
+    res.json(updated);
   } catch (error) {
     next(error)
   }
