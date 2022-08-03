@@ -8,7 +8,8 @@ const requireToken = async (req, res, next) => {
     const user = await User.findByToken(token);
     req.user = user;
     next();
-  } catch (error) {
+  }
+  catch (error) {
     next(error);
   }
 };
@@ -22,7 +23,8 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'name', 'address', 'username'],
     });
     res.json(users);
-  } catch (error) {
+  }
+  catch (error) {
     next(error);
   }
 });
@@ -32,16 +34,20 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.authenticate(req.body);
     const token = await user.generateToken();
     res.json(token);
-  } catch (error) {
+  }
+  catch (error) {
     next(error);
   }
 });
 
 router.get('/:userId', requireToken, async (req, res, next) => {
-  console.log('req', req);
   try {
-    if (req.user) res.json(req.user);
-  } catch (error) {
+    if (req.user.id === req.params.id) {
+      res.json(req.user);
+    }
+    else res.status(403).send();
+  }
+  catch (error) {
     next(error);
   }
 });
@@ -53,7 +59,9 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
         userId: req.user.id,
       },
     });
-  } catch (error) {
+    res.json(userOrders);
+  }
+  catch (error) {
     next(error);
   }
 });
@@ -63,7 +71,8 @@ router.put('/:userId', async (req, res, next) => {
     const user = await User.findByPk(req.params.userId);
     const updated = await user.update(req.body);
     res.json(updated);
-  } catch (error) {
+  }
+  catch (error) {
     next(error);
   }
 });
