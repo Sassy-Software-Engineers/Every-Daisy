@@ -59,6 +59,7 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
         userId: req.user.id,
       },
     });
+    res.json(userOrders);
   }
   catch (error) {
     next(error);
