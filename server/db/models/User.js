@@ -19,28 +19,28 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  address: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  status: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'MEMBER',
-    validate: {
-      isIn: [['MEMBER', 'ADMIN']],
-    },
-  },
+  // name: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     notEmpty: true,
+  //   },
+  // },
+  // address: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     notEmpty: true,
+  //   },
+  // },
+  // status: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   defaultValue: 'MEMBER',
+  //   validate: {
+  //     isIn: [['MEMBER', 'ADMIN']],
+  //   },
+  // },
 });
 
 module.exports = User;
