@@ -28,12 +28,14 @@ class SingleProduct extends React.Component {
   }
 }
 
-const mapState = ({ product }) => ({
-  product,
-});
+const mapState = (state) => {
+  return {
+      product: state.singleProduct
+  }
+}
 
 const mapDispatch = (dispatch) => ({
-  fetchProduct: (id) => dispatch(fetchStudent(id)),
+  fetchProduct: (id) => dispatch(fetchProduct(id)),
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);
