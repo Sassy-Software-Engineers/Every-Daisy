@@ -5,6 +5,11 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
 import AllProducts from './components/AllProducts';
+// import AddUser from './components/AddUser';
+// import EditProduct from './components/EditProduct';
+// import EditUser from './components/EditUser';
+import SingleProduct from './components/SingleProduct';
+
 
 /**
  * COMPONENT
@@ -30,13 +35,14 @@ class Routes extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/products/:id" component={SingleProduct} />
           </Switch>
         )}
       </div>
     )
   }
 }
-
+//one switch statement with conditionals 
 /**
  * CONTAINER
  */

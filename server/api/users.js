@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../db/models/User');
 const Order = require('../db/models/Order');
 
+//TODO: Put this into a middleware file so can be imported for other files too
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
@@ -66,9 +67,11 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
   }
 });
 
-router.put('/:userId', async (req, res, next) => {
+router.put('/:userId', requireToken, async (req, res, next) => {
   try {
+    //TODO:req.user.isAdmin
     const user = await User.findByPk(req.params.userId);
+
     const updated = await user.update(req.body);
     res.json(updated);
   }
@@ -76,5 +79,4 @@ router.put('/:userId', async (req, res, next) => {
     next(error);
   }
 });
-
 module.exports = router;

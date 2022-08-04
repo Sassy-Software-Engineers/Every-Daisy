@@ -3,6 +3,7 @@ const {
   models: { Product, Review, Category },
 } = require('../db');
 module.exports = router;
+//TODO: add requireToken middleware and req.user.isAdmin for post route
 
 /*All products Route*/
 router.get('/', async (req, res, next) => {

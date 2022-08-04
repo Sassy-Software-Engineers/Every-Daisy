@@ -41,6 +41,8 @@ const User = db.define('user', {
   //     isIn: [['MEMBER', 'ADMIN']],
   //   },
   // },
+  //TODO:add isAdmin boolean into model 
+
 });
 
 module.exports = User;
