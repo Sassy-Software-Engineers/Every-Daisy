@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteUser } from '../store/useres';
+import { deleteUser } from '../store/allUsers';
 import { fetchUser, setUser, updateUser } from '../store/singleUser';
 
 export class EditUser extends React.Component {
