@@ -27,3 +27,12 @@ router.get('/:productId', async (req, res, next) => {
     next(e);
   }
 });
+/*add product - restricted to admin*/
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body);
+    res.send(product);
+  } catch (e) {
+    next(e);
+  }
+});
