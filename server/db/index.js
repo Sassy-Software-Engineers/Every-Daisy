@@ -19,7 +19,9 @@ Product.hasMany(Review);
 Category.belongsToMany(Product, { through: 'product_categories' });
 Product.belongsToMany(Category, { through: 'product_categories' });
 
-//TODO: order and product many to many relation
+Order.belongsToMany(Product, {through:'cart'})
+Product.belongsToMany(Order, {through:'cart'})
+
 
 module.exports = {
   db,

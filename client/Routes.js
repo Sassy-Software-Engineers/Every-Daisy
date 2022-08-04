@@ -42,7 +42,7 @@ class Routes extends Component {
     )
   }
 }
-//one switch statement with conditionals 
+
 /**
  * CONTAINER
  */

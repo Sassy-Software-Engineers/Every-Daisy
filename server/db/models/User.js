@@ -19,6 +19,9 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN
+  }
   // name: {
   //   type: Sequelize.STRING,
   //   allowNull: false,
@@ -41,7 +44,6 @@ const User = db.define('user', {
   //     isIn: [['MEMBER', 'ADMIN']],
   //   },
   // },
-  //TODO:add isAdmin boolean into model 
 
 });
 
