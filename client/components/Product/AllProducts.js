@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchProducts } from '../store/allProducts';
+import { fetchProducts } from '../../store/products/allProducts';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
