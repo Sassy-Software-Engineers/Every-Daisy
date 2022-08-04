@@ -3,7 +3,8 @@ const {
   models: { Product, Review, Category },
 } = require('../db');
 module.exports = router;
-//TODO: add requireToken middleware and req.user.isAdmin for post route
+const requireToken = require('./middlewares')
+
 
 /*All products Route*/
 router.get('/', async (req, res, next) => {
@@ -28,8 +29,9 @@ router.get('/:productId', async (req, res, next) => {
     next(e);
   }
 });
+
 /*add product - restricted to admin*/
-router.post('/', async (req, res, next) => {
+router.post('/', requireToken, async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
     res.send(product);
