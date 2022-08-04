@@ -1,14 +1,12 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
+import { Login, Signup } from './components/Auth/AuthForm';
+import Home from './components/Home/Home';
 import {me} from './store'
-import AllProducts from './components/AllProducts';
-// import AddUser from './components/AddUser';
+import AllProducts from './components/Product/AllProducts';
 // import EditProduct from './components/EditProduct';
-// import EditUser from './components/EditUser';
-import SingleProduct from './components/SingleProduct';
+import SingleProduct from './components/Product/SingleProduct';
 
 
 /**

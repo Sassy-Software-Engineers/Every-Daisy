@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SearchBar from './components/SearchBar'
+import SearchBar from './components/Elements/SearchBar'
 import Routes from './Routes'
 
 const App = () => {
