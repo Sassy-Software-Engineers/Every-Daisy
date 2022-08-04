@@ -21,10 +21,10 @@ export class AllProducts extends React.Component {
               className="products-container"
               key={product.id}
               style={{
-                border: '2px solid #7A968C',
+                border: '6px solid #7A968C',
                 borderRadius:'25px ',
                 marginTop: '20px',
-                backgroundColor: '#FFF0E6',
+                backgroundColor: '#E8DBD1',
                 padding:'5px'
               }}
             >
@@ -35,7 +35,7 @@ export class AllProducts extends React.Component {
                 src={product.image}
                 style={{ width: '15rem', height: '15rem', borderRadius: '25%', border:'4px solid #7A968C' }}
               />
-              <p><small>${product.price}</small></p>
+              <div><small>${product.price}</small> <span>ADD TO CART</span></div>
 
               <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
