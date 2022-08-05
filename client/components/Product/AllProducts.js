@@ -1,38 +1,39 @@
 import React from 'react';
 import { fetchProducts } from '../../store/products/allProducts';
-// import { fetchCategories } from '../../store/AllCategories
+import { fetchCategories } from '../../store/AllCategories
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {  fetchCart, setCartAdd, setCartRemove } from '../../store/cart/cart'
+import { fetchCart, setCartAdd } from '../../store/cart/cart';
 
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'all',
+      filter: 'all',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
+
   handleChange(e) {
     this.setState({
       value: e.target.value,
     });
   }
   handleClick(e) {
-    
+    this.props.addItem(e.target.value);
   }
-
-
   componentDidMount() {
     this.props.getProducts();
-    // this.props.getCategories()
+    this.props.getCategories();
   }
+
   render() {
     let products = this.props.products;
-    // let categories = this.props.categories
-    let currentValue = this.state.value;
+    let categories = this.props.categories;
+    let currentFilter = this.state.filter;
+
     return (
       <div
         className="products-component"
@@ -60,18 +61,24 @@ export class AllProducts extends React.Component {
         </div>
 
         {
-          // don't know if product.categories is the right way to get there, might need to change to fit whatever the console.log
-          // of products is. should be an array of the products categories
+          // might need to change to fit whatever the path to the product's categories is
           // EVERY product should have a category
           products
             .filter((product) => {
-              if (currentValue !== 'all') {
-                return product.categories.includes(currentValue);
+              if (currentFilter !== 'all') {
+                return product.categories.includes(currentFilter);
               } else {
                 return product;
               }
             })
             .map((product) => {
+       // might need to change product.reviews to whatever the path is to get each review
+              let averageRating = Math.floor(
+                product.reviews.reduce((accum, cur) => {
+                  return cur.starRating + accum;
+                }, 0) / product.reviews.length
+              );
+              
               return (
                 <div
                   className="products-container"
@@ -87,6 +94,7 @@ export class AllProducts extends React.Component {
                   <Link to={`/products/${product.id}`}>
                     <h1 style={{ color: '#96716B' }}>{product.title}</h1>
                   </Link>
+
                   <img
                     src={product.image}
                     style={{
@@ -96,12 +104,16 @@ export class AllProducts extends React.Component {
                       border: '4px solid #7A968C',
                     }}
                   />
+
                   <div>
-                    <small>${product.price}</small> <button value={product} onClick={this.handleClick}>ADD TO CART</button>
+                    <small>${product.price}</small>{' '}
+                    <button value={product} onClick={this.handleClick}>
+                      ADD TO CART
+                    </button>
                   </div>
 
                   <div className="star-rating">
-                    {[...Array(5)].map((star, index) => {
+                    {[...Array({ averageRating })].map((star, index) => {
                       index += 1;
                       return (
                         <span className="star" key={index}>
@@ -110,6 +122,7 @@ export class AllProducts extends React.Component {
                       );
                     })}
                   </div>
+
                 </div>
               );
             })
@@ -122,16 +135,17 @@ export class AllProducts extends React.Component {
 const mapState = (state) => {
   return {
     products: state.allProducts,
-    // categories: state.allCategories
-    cart: state.cart
+    categories: state.allCategories,
+    cart: state.cart,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    //getCategories () => dispatch(fetchCategories())
-    getCart: () => dispatch(fetchCart())
+    getCategories: () => dispatch(fetchCategories()),
+    getCart: () => dispatch(fetchCart()),
+    addItem: (product) => dispatch(setCartAdd(product)),
   };
 };
 
