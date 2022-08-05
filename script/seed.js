@@ -65,9 +65,18 @@ const products = [
   },
 ];
 const categories = [
-  { name: 'Herb' },
-  { name: 'flowering' },
-  { name: 'tropical' },
+  {
+    name: 'Herb',
+    productId: 1,
+  },
+  {
+    name: 'flowering',
+    productId: 2,
+  },
+  {
+    name: 'tropical',
+    productId: 3,
+  },
 ];
 const orders = [
   {
