@@ -52,10 +52,11 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
 
 router.put('/:userId', requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-
-    const updated = await user.update(req.body);
-    res.json(updated);
+    if (req.user.isAdmin || req.user.id === req.params.id) {
+      const user = await User.findByPk(req.params.userId);
+      const updated = await user.update(req.body);
+      res.json(updated);
+    } else res.status(403).send();
   } catch (error) {
     next(error);
   }
