@@ -3,6 +3,9 @@ const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const Order = require('./Order');
+const Product = require('./Product');
+const CartItem = require('./CartItem');
 
 const SALT_ROUNDS = 5;
 
@@ -22,7 +25,7 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
-  }
+  },
   // name: {
   //   type: Sequelize.STRING,
   //   allowNull: false,
@@ -45,7 +48,6 @@ const User = db.define('user', {
   //     isIn: [['MEMBER', 'ADMIN']],
   //   },
   // },
-
 });
 
 module.exports = User;
@@ -62,6 +64,40 @@ User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
+User.prototype.getCartItems = async function () {
+  let cart = await User.findAll({
+    where: { userId: this.id, status: 'PENDING' },
+  });
+  if (!cart) cart = await Order.create({ where: { userId: this.id } });
+  
+  return Order.findByPk(cart.id, {
+    include: [{ model: CartItem, include: [Product] }],
+  });
+};
+
+User.prototype.addCartItems = async function (product) {
+  let cart = await this.getCartItems()
+  let cartItem = cart.cartItems.find(cartItem => cartItem.productId === product.id)
+  if(cartItem){
+    cartItem.quantity++
+   await cartItem.save()
+  } else {
+    await CartItem.create({productId: product.id, orderId: cart.id, quantity:1, price: product.price})
+  }
+  return this.getCartItems()
+};
+
+User.prototype.removeCartItems = async function (product) {
+  let cart = await this.getCartItems()
+  let cartItem = cart.cartItems.find(cartItem => cartItem.productId === product.id)
+  if(cartItem.quantity > 1){
+    cartItem.quantity--
+    await cartItem.save()
+  } else {
+    await cartItem.destroy()
+  }
+  return this.getCartItems()
+};
 /**
  * classMethods
  */
