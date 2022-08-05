@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const User = require('../db/models/User');
 const Order = require('../db/models/Order');
-const requireToken = require('./middlewares')
-
+const { requireToken, isAdmin } = require('./middlewares');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -13,8 +12,7 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'name', 'address', 'username'],
     });
     res.json(users);
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -24,8 +22,7 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.authenticate(req.body);
     const token = await user.generateToken();
     res.json(token);
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -34,10 +31,8 @@ router.get('/:userId', requireToken, async (req, res, next) => {
   try {
     if (req.user.id === req.params.id) {
       res.json(req.user);
-    }
-    else res.status(403).send();
-  }
-  catch (error) {
+    } else res.status(403).send();
+  } catch (error) {
     next(error);
   }
 });
@@ -50,8 +45,7 @@ router.get('/:userId/orders', requireToken, async (req, res, next) => {
       },
     });
     res.json(userOrders);
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -62,8 +56,7 @@ router.put('/:userId', requireToken, async (req, res, next) => {
 
     const updated = await user.update(req.body);
     res.json(updated);
-  }
-  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
