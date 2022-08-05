@@ -4,7 +4,7 @@ const { TEXT, INTEGER, STRING, DECIMAL } = Sequelize;
 /*Must have title, description, price, and inventory quantity
 Must belong to at least one category
 If there is no photo, there must be a placeholder photo used*/
-const Product = db.define('Product', {
+const Product = db.define('product', {
   title: {
     type: STRING,
     allowNull: false,
