@@ -34,8 +34,13 @@ router.get('/:orderId', async (req, res, next) => {
     // need this to recieve orderId and id of product to be able to update ?
     // well see
     try {
-      const order = await Order.findByPk(req.params.orderId)
-
+      const cartItems = await CartItem.findAll({where: {
+        orderId: req.params.orderId,
+        
+        },
+        include: Order
+    });
+    
       res.json(updated);
     }
     catch (error) {
