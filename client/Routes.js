@@ -14,11 +14,10 @@ import SingleProduct from './components/Product/SingleProduct';
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData();
   }
 
   render() {
-    const {isLoggedIn} = this.props
 
     return (
       <div>
@@ -31,16 +30,10 @@ class Routes extends Component {
             <Route path="/home">
               <Redirect to="/" />
             </Route>
-            <Route path="/users">
-              {isLoggedIn ? <Route path="/users" component={AllUsers} /> : <Route path="/login" component={Login} />}
-            </Route>
-            <Route path="/users/:userId">
-              {isLoggedIn ? <Route path="/users/:userId" component={SingleUser} /> : <Route path="/login" component={Login} />}
-            </Route>
           </Switch>
 
       </div>
-    )
+    );
   }
 }
 
@@ -52,17 +45,17 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me())
+      dispatch(me());
     }
-  }
-}
+  };
+};
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(mapState, mapDispatch)(Routes));
