@@ -65,12 +65,12 @@ User.prototype.generateToken = function () {
 };
 
 User.prototype.getCartItems = async function () {
-  let cart = await User.findAll({
+  let cart = await Order.findAll({
     where: { userId: this.id, status: 'PENDING' },
   });
   if (!cart) cart = await Order.create({ where: { userId: this.id } });
   
-  return Order.findByPk(cart.id, {
+  return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
 };
