@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-
 const Order = db.define('order', {
   quantity: {
     type: Sequelize.INTEGER,
@@ -12,7 +11,7 @@ const Order = db.define('order', {
     allowNull: false,
     defaultValue: 'PENDING',
     validate: {
-      isIn: [['PENDING, PROCESSING', 'SHIPPED', 'DELIVERED', 'ERROR']],
+      isIn: [['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'ERROR']],
     },
   },
 });
