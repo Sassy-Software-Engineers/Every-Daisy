@@ -3,7 +3,8 @@
 const { db } = require('../server/db');
 const User = require('../server/db/models/User');
 const Product = require('../server/db/models/Product');
-
+const Category = require('../server/db/models/Category');
+const Order = require('../server/db/models/Order');
 const users = [
   {
     username: 'admin@gmail.com',
@@ -63,6 +64,24 @@ const products = [
       'https://bloomscape.com/wp-content/uploads/2021/09/bloomscape_bromeliad-summer_small_slate.jpg?ver=596856',
   },
 ];
+const categories = [
+  { name: 'Herb' },
+  { name: 'flowering' },
+  { name: 'tropical' },
+];
+const orders = [
+  {
+    quantity: 2,
+    status: 'SHIPPED',
+  },
+  {
+    quantity: 1,
+  },
+  {
+    quantity: 1,
+    status: 'DELIVERED',
+  },
+];
 
 /**
  * seed - this function clears the database, updates tables to
@@ -79,6 +98,16 @@ const seed = async () => {
     await Promise.all(
       products.map((product) => {
         return Product.create(product);
+      })
+    );
+    await Promise.all(
+      categories.map((category) => {
+        return Category.create(category);
+      })
+    );
+    await Promise.all(
+      orders.map((order) => {
+        return Order.create(order);
       })
     );
   } catch (err) {
@@ -119,7 +148,7 @@ async function runSeed() {
     console.error(err);
     process.exitCode = 1;
   } finally {
-    console.log('closing db connection');
+    console.log('seeding success!');
     await db.close();
     console.log('db connection closed');
   }
