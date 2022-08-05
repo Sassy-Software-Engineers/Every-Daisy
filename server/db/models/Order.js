@@ -1,9 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-//order model can be cart 
-//order is cart applying payment method to it 
-//have a cart status
+
 const Order = db.define('order', {
   quantity: {
     type: Sequelize.INTEGER,
@@ -12,9 +10,9 @@ const Order = db.define('order', {
   status: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'PROCESSING',
+    defaultValue: 'PENDING',
     validate: {
-      isIn: [['PROCESSING', 'SHIPPED', 'DELIVERED', 'ERROR']],
+      isIn: [['PENDING, PROCESSING', 'SHIPPED', 'DELIVERED', 'ERROR']],
     },
   },
 });
