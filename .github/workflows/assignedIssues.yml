@@ -1,0 +1,16 @@
+# This is a basic workflow to help you get started with Actions
+#name: assigned Issues
+name: GitHub Project Automation+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  automate-project-columns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.1
+        with:
+          project: Grace Shopper Project
+          column: In Progress
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
