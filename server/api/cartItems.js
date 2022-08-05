@@ -2,18 +2,16 @@ const router = require('express').Router();
 const {
   models: { Product, Order, CartItem },
 } = require('../db');
+const User = require('../db/models/User');
 const requireToken = require('./middlewares')
 
 // need a router.use in index for /cart
 
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
     try {
-      const cartItems = await CartItem.findAll({where: {
-        orderId: req.params.orderId,
-        },
-        include: Order
-    });
-      res.json(cartItems);
+      const user = User.findByToken(req.headers.authorization)
+      let cart = await user.getCartItems()
+      res.json(cart);
     } catch (e) {
       next(e);
     }
