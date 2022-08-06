@@ -61,3 +61,11 @@ Admins can see pending orders that need to be shipped
 🌟Customers get email confirmations
 
 [Tiers](https://github.com/FullstackAcademy/2206-GHP-RM-WEB-FT/blob/main/03-senior-phase/Grace_Shopper_Tiers.md)
+
+Colors {
+--middle-yellow-red: #f1bb87ff;
+--ecru: #aea57cff;
+--russian-green: #6b8f71ff;
+--light-cyan: #d9fff5ff;
+--magic-mint: #b9f5d8ff;
+} [colorPalette](https://coolors.co/f1bb87-aea57c-6b8f71-d9fff5-b9f5d8)
