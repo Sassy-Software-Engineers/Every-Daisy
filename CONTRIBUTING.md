@@ -21,7 +21,7 @@ Be aware of Grace Shopper Related Objectives:
 - Update their task with comments and status:
   - Being clear and concise and understandable.
   - It should be easy for other group members to easily understand what you're working on and its status by looking at the project board.
-- link issue to pull request when initiating "Compare and Pull" in github.
+- link issue to pull request when initiating "Compare and Pull" in github. [see_this_link](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 - Refer to github docs [here](./README.md) And first try to figure out how to properly complete your task.
   -Then Ask gitMaster for help on this after that if you’re still unsure.
   **Goal should be to keep Project board up to date so that we aren't communicating about project issues through discord and slack.**
