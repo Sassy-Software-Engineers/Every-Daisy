@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchProducts } from '../../store/products/allProducts';
-import { fetchCategories } from '../../store/AllCategories
+import { fetchCategories } from '../../store/categories/allCategories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, setCartAdd } from '../../store/cart/cart';
