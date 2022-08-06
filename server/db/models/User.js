@@ -69,34 +69,45 @@ User.prototype.getCartItems = async function () {
     where: { userId: this.id, status: 'PENDING' },
   });
   if (!cart) cart = await Order.create({ where: { userId: this.id } });
-  
+
   return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
 };
 
 User.prototype.addCartItems = async function (product) {
-  let cart = await this.getCartItems()
-  let cartItem = cart.cartItems.find(cartItem => cartItem.productId === product.id)
-  if(cartItem){
-    cartItem.quantity++
-   await cartItem.save()
+  let cart = await this.getCartItems();
+  console.log('CART', cart);
+  let cartItem = cart.cartItems.find(
+    (cartItem) => cartItem.productId === product.id
+  );
+  console.log('CARTITEM', cartItem);
+  if (cartItem) {
+    cartItem.quantity++;
+    await cartItem.save();
   } else {
-    await CartItem.create({productId: product.id, orderId: cart.id, quantity:1, price: product.price})
+    await CartItem.create({
+      productId: product.id,
+      orderId: cart.id,
+      quantity: 1,
+      price: product.price,
+    });
   }
-  return this.getCartItems()
+  return this.getCartItems();
 };
 
 User.prototype.removeCartItems = async function (product) {
-  let cart = await this.getCartItems()
-  let cartItem = cart.cartItems.find(cartItem => cartItem.productId === product.id)
-  if(cartItem.quantity > 1){
-    cartItem.quantity--
-    await cartItem.save()
+  let cart = await this.getCartItems();
+  let cartItem = cart.cartItems.find(
+    (cartItem) => cartItem.productId === product.id
+  );
+  if (cartItem.quantity > 1) {
+    cartItem.quantity--;
+    await cartItem.save();
   } else {
-    await cartItem.destroy()
+    await cartItem.destroy();
   }
-  return this.getCartItems()
+  return this.getCartItems();
 };
 /**
  * classMethods
