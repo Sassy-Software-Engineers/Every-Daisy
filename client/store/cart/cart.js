@@ -4,7 +4,7 @@ const TOKEN = 'token';
 
 //thunk
 export const fetchCart = () => async dispatch => {
-    const token = window.localStorage.getStorage.getItem(TOKEN);
+    const token = window.localStorage.getItem(TOKEN);
     const res = await axios.get('/api/cart', {
         headers: {
             authorization: token,
@@ -15,7 +15,7 @@ export const fetchCart = () => async dispatch => {
 
 export const setCartAdd = (product) => async (dispatch) => {
     try {
-        const token = window.localStorage.getStorage.getItem(TOKEN);
+        const token = window.localStorage.getItem(TOKEN);
         const res = await axios.post('/api/cart/addToCart', product, 
         {
             headers: {
@@ -30,7 +30,7 @@ export const setCartAdd = (product) => async (dispatch) => {
 
 export const setCartRemove = (product) => async (dispatch) => {
     try {
-        const token = window.localStorage.getStorage.getItem(TOKEN);
+        const token = window.localStorage.getItem(TOKEN);
         const res = await axios.post('/api/cart/removeFromCart', product, 
         {
             headers: {

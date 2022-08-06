@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, addCart, removeCart } from '../../store/cart/cart';
+import { fetchCart, setCartAdd, setCartRemove } from '../../store/cart/cart';
 import { Link } from 'react-router-dom';
 
 export class Cart extends React.Component {
@@ -72,8 +72,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getCart: () => dispatch(fetchCart()),
-    addToCart: (product) => dispatch(addCart(product)),
-    removeFromCart: (product) => dispatch(removeCart(product)),
+    addToCart: (product) => dispatch(setCartAdd(product)),
+    removeFromCart: (product) => dispatch(setCartRemove(product)),
   };
 };
 

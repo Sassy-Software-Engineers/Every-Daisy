@@ -11,7 +11,9 @@ export class SearchBar extends React.Component {
   render() {
     let handleClick = this.props.handleClick;
     let isLoggedIn = this.props.isLoggedIn;
-    let cartTotalItems = cart.cartItems.reduce(
+    let cart = this.props.cart || {};
+    let cartItems = cart.cartItems || [];
+    let cartTotalItems = cartItems.reduce(
       (accum, cur) => accum + cur.quantity,
       0
     );
