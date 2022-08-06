@@ -26,28 +26,6 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  // name: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     notEmpty: true,
-  //   },
-  // },
-  // address: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     notEmpty: true,
-  //   },
-  // },
-  // status: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   defaultValue: 'MEMBER',
-  //   validate: {
-  //     isIn: [['MEMBER', 'ADMIN']],
-  //   },
-  // },
 });
 
 module.exports = User;
