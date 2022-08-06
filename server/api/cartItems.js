@@ -4,8 +4,6 @@ const {
 } = require('../db');
 module.exports = router;
 
-// need a router.use in index for /cart
-
 router.get('/', async (req, res, next) => {
   try {
     let user = await User.findByToken(req.headers.authorization);
@@ -25,6 +23,9 @@ router.post('/addCartItem', async (req, res, next) => {
     next(e);
   }
 });
+
+// //should this be a put instead to just remove from the cart,
+// not delete entirely?
 
 router.delete('/removeCartItem', async (req, res, next) => {
   try {
