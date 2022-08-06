@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, addCart, removeCart } from '../../store/cart/cart';
+import { Link } from 'react-router-dom';
 
 export class Cart extends React.Component {
   constructor() {
     super();
+    this.handleAdd = this.handleAdd.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
@@ -32,17 +35,20 @@ export class Cart extends React.Component {
         {cartItems.length > 0 ? (
           cartItems.map((cartItem) => {
             return (
-              <div key={cartItem.id}>
-                <h2>{cartItem.product.title}</h2>
+              <div key={cartItem.id} style={{border:'1px solid'}}>
+               <Link to={`/products/${cartItem.productId}`}><h2>{cartItem.product.title}</h2></Link>
+
+               <div className='quantity'>
                 <small>{cartItem.quantity}</small>
                 {/* find the total price for each item based on how many you're buying */}
-                <p>{cartItem.price * cartItem.quantity}</p>
                 <button value={cartItem.product} onClick={this.handleAdd}>
                   +
                 </button>
                 <button value={cartItem.product} onClick={this.handleRemove}>
                   -
                 </button>
+                </div>
+                <p>{cartItem.price * cartItem.quantity}</p>
               </div>
             );
           })
