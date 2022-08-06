@@ -30,3 +30,4 @@ export class Cart extends React.Component {
 // };
   
 // export default connect(mapState, mapDispatch)(Cart);
+export default Cart;
