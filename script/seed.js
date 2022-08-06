@@ -108,8 +108,9 @@ async function seed() {
   const [newCategories] = await Promise.all(
     categories.map((c) => Category.create(c))
   );
+
   console.log(
-    `seeded ${users.length} users, ${newProducts.length} products, ${orders.length} orders, ${categories.length} categories`
+    `seeded ${users.length} users, ${products.length} products, ${orders.length} orders, ${categories.length} categories`
   );
   return (
     newUsers.dataValues,

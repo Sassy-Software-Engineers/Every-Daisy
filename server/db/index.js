@@ -20,8 +20,9 @@ Product.hasMany(Review);
 Category.belongsToMany(Product, { through: 'product_categories' });
 Product.belongsToMany(Category, { through: 'product_categories' });
 
-Order.belongsToMany(Product, { through: 'cart_item' });
-Product.belongsToMany(Order, { through: 'cart_item' });
+CartItem.belongsTo(Product);
+CartItem.belongsTo(Order);
+Order.hasMany(CartItem);
 
 module.exports = {
   db,

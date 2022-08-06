@@ -21,6 +21,7 @@ Be aware of Grace Shopper Related Objectives:
 - Update their task with comments and status:
   - Being clear and concise and understandable.
   - It should be easy for other group members to easily understand what you're working on and its status by looking at the project board.
+
 - link issue to pull request when initiating "Compare and Pull" in github.
   [See](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
 - Refer to github doc links provided [here](./README.md) And first try to figure out how to properly complete your task.
@@ -37,9 +38,18 @@ Be aware of Grace Shopper Related Objectives:
 - GitMaster should not have to do more than Review Code, and ensure the git workflow is clean and well kept.
 - Someone else will approve gitMaster’s pull requests.
 
+- link issue to pull request when initiating "Compare and Pull" in github. [see_this_link](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+- Refer to github docs [here](./README.md) And first try to figure out how to properly complete your task.
+  -Then Ask gitMaster for help on this after that if you’re still unsure.
+  **Goal should be to keep Project board up to date so that we aren't communicating about project issues through discord and slack.**
+  _Suggestion_: Using Git discussions on Grace Shopper Repo
+
+
 ### TaskMaster
 
 - Responsible for assigning new tasks and double checking that group members are updating their status.
+
 - Is in charge of the Project Board.
 - Should call out members _kindly_ who are not following the guidelines and updating their status, members are aware this is expected but everyone forgets sometimes.
 - Task Master should also not have to do more than making sure people have tasks and creating new Tasks.
+
