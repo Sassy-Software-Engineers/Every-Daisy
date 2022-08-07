@@ -28,7 +28,6 @@ const User = db.define('user', {
 });
 
 module.exports = User;
-
 /**
  * instanceMethods
  */
@@ -42,7 +41,7 @@ User.prototype.generateToken = function () {
 };
 
 User.prototype.getCartItems = async function () {
-  let cart = await Order.findAll({
+  let cart = await Order.findOne({
     where: { userId: this.id, status: 'PENDING' },
   });
   if (!cart)
@@ -51,12 +50,8 @@ User.prototype.getCartItems = async function () {
       status: 'PENDING',
       quantity: 1,
     });
-  console.log(
-    Order.findByPk(cart.id, {
-      include: [{ model: CartItem, include: [Product] }],
-    })
-  );
-  return Order.findByPk(cart.id, {
+  console.log('CART', cart, 'THIS ID', this.id);
+  return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
 };
