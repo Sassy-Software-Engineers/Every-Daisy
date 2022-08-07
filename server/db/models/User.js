@@ -49,11 +49,6 @@ User.prototype.getCartItems = async function () {
       userId: this.id,
       status: 'PENDING',
     });
-  console.log(
-    Order.findByPk(cart.id, {
-      include: [{ model: CartItem, include: [Product] }],
-    })
-  );
   return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
@@ -61,7 +56,6 @@ User.prototype.getCartItems = async function () {
 
 User.prototype.addCartItems = async function (product) {
   let cart = await this.getCartItems();
-  console.log('CART', cart);
   let cartItem = cart.cartItems.find(
     (cartItem) => cartItem.productId === product.id
   );
