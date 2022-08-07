@@ -2,3 +2,13 @@
     margin:auto;
     text-align: center;
 }
+.search-bar-container h1 {
+    color: #6b8f71ff;
+}
+* {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    }
+    h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    }
