@@ -8,13 +8,17 @@ const CartItem = db.define('cartItem', {
       min: 0,
     },
   },
-  price: {
-    type: Sequelize.DECIMAL(6, 2),
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
+  /**
+   * Removed b/c should refer to product.price - Prof video's model matches this, but can revisit later
+   */
+
+  // price: {
+  //   type: Sequelize.DECIMAL(6, 2),
+  //   // allowNull: false,
+  //   // validate: {
+  //   //   notEmpty: true,
+  //   // },
+  // },
 });
 
 module.exports = CartItem;

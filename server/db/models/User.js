@@ -6,7 +6,6 @@ const Order = require('./Order');
 const Product = require('./Product');
 const CartItem = require('./CartItem');
 
-
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
@@ -29,7 +28,6 @@ const User = db.define('user', {
 });
 
 module.exports = User;
-
 /**
  * instanceMethods
  */
@@ -43,11 +41,14 @@ User.prototype.generateToken = function () {
 };
 
 User.prototype.getCartItems = async function () {
-  let cart = await Order.findAll({
+  let cart = await Order.findOne({
     where: { userId: this.id, status: 'PENDING' },
   });
-  if (!cart) cart = await Order.create({ where: { userId: this.id } });
-
+  if (!cart)
+    cart = await Order.create({
+      userId: this.id,
+      status: 'PENDING',
+    });
   return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
@@ -55,11 +56,9 @@ User.prototype.getCartItems = async function () {
 
 User.prototype.addCartItems = async function (product) {
   let cart = await this.getCartItems();
-  console.log('CART', cart);
   let cartItem = cart.cartItems.find(
     (cartItem) => cartItem.productId === product.id
   );
-  console.log('CARTITEM', cartItem);
   if (cartItem) {
     cartItem.quantity++;
     await cartItem.save();
