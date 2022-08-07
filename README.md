@@ -29,7 +29,7 @@ _Linking a pull request to an issue_
 #### Group Work
 
 In this project, you will work in teams of 4. In a team of four people A B C D, there are 3 unique pairing combinations: AB CD, AC BD, AD BC. As you work through the project, please continue to switch pairs on a feature by feature basis. If a feature is taking more than two days, please consult your assigned fellow or an instructor.
-
+https://github.com/Sassy-Software-Engineers/Grace-Shopper/pull/130/conflict?name=README.md&ancestor_oid=9b0f089bd31d25d113ad44a509dbf8dce7c30bd7&base_oid=41f074daeeb4087321ee820453602d9873304ff7&head_oid=8be65d4d9907ae46d47da69615efb9351e0645c1
 Use Git to manage your project, and GitHub for easy collaboration. As needed, meet as a team to decide on the next reachable goals for your project and split them into achievable tasks. For a given task, we recommend the following workflow.
 
 [Suggested](https://learn.fullstackacademy.com/workshop/54b3de126adfdb0b0027d52f/content/54b3de6f6adfdb0b0027d559/text)
@@ -60,4 +60,16 @@ Customers can checkout, using a real payment api (probably Stripe)
 Admins can see pending orders that need to be shipped
 🌟Customers get email confirmations
 
+
 [Tiers](https://github.com/FullstackAcademy/2206-GHP-RM-WEB-FT/blob/main/03-senior-phase/Grace_Shopper_Tiers.md)
+
+Colors {
+--middle-yellow-red: #f1bb87ff;
+--ecru: #aea57cff;
+--russian-green: #6b8f71ff;
+--light-cyan: #d9fff5ff;
+--magic-mint: #b9f5d8ff;
+} [colorPalette](https://coolors.co/f1bb87-aea57c-6b8f71-d9fff5-b9f5d8)
+
+
+
