@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../../store/auth/auth';
 import { fetchCart } from '../../store/cart/cart';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import './NavBar.css';
 
 export class SearchBar extends React.Component {
   componentDidMount() {
@@ -20,56 +24,33 @@ export class SearchBar extends React.Component {
 
     return (
       <div className="search-bar-container">
-        <div className="logo-name">
-          <h1>Every Daisy of the Week</h1>
+        <h1>Every Daisy of the Week</h1>
+        <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand><Nav.Link as={NavLink} to="/">Home</Nav.Link></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
+            <Nav.Link as={NavLink} to="/">Account</Nav.Link>
+            {isLoggedIn ? <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
+            <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
+            }
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+        <div className="search-bar">
+          <label htmlFor="search">Search Products:</label>
+          <input type="text" placeholder="enter your terms..." name="search" />
+          <button>Submit</button>
         </div>
-        <nav>
-          <div className="search-bar">
-            <label htmlFor="search">Search Products:</label>
-            <input
-              type="text"
-              placeholder="enter your terms..."
-              name="search"
-            />
-            <button>Submit</button>
-          </div>
 
-          <div className="cart">
-            <button>Cart</button>
-          </div>
-
-          <div className="user-actions">
-            {isLoggedIn ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">Home</Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-              </div>
-            )}
-          </div>
-
-          <div className="burger-button">
-            <button>hamburger</button>
-          </div>
-
-          <div className="burger-menu">
-            <a>Account</a>
-            <a>Orders</a>
-            <a>Sale</a>
-            <a>Recommendations</a>
-          </div>
-          <div className="cart-icon">
+        <div className="cart-icon">
+          <Link to={`/cart`}>
             <span>{`Cart (${cartTotalItems})`}</span>
-          </div>
-        </nav>
+          </Link>
+        </div>
       </div>
     );
   }

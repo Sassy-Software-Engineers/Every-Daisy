@@ -1,0 +1,12 @@
+
+
+.homepage {
+    font-family: 'Consolas, monaco, monospace';
+    margin:auto;
+    text-align: center;
+}
+.card{
+    width:20rem;
+    margin:auto;
+    background-color: #d9fff5ff;
+}
