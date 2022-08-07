@@ -112,7 +112,7 @@ User.findByToken = async function(token) {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
     if (!user) {
-      throw 'nooo';
+      return null;
     }
     return user;
   }
@@ -127,7 +127,7 @@ User.findByDevice = async function(device) {
   try {
     const user = User.findOne({ where: { device } });
     if (!user) {
-      throw 'oops';
+      return null;
     }
     return user;
   }
