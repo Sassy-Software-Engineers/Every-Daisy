@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Product, Order, CartItem, User },
+  models: { User },
 } = require('../db');
 module.exports = router;
 
@@ -24,10 +24,7 @@ router.post('/addCartItem', async (req, res, next) => {
   }
 });
 
-// //should this be a put instead to just remove from the cart,
-// not delete entirely?
-
-router.delete('/removeCartItem', async (req, res, next) => {
+router.post('/removeCartItem', async (req, res, next) => {
   try {
     let user = await User.findByToken(req.headers.authorization);
     let newCart = await user.removeCartItems(req.body);
