@@ -48,9 +48,12 @@ User.prototype.getCartItems = async function () {
     cart = await Order.create({
       userId: this.id,
       status: 'PENDING',
-      quantity: 1,
     });
-  console.log('CART', cart, 'THIS ID', this.id);
+  console.log(
+    Order.findByPk(cart.id, {
+      include: [{ model: CartItem, include: [Product] }],
+    })
+  );
   return await Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
@@ -73,7 +76,6 @@ User.prototype.addCartItems = async function (product) {
       price: product.price,
     });
   }
-  console.log('CARTITEM', cartItem);
   return this.getCartItems();
 };
 
