@@ -6,7 +6,9 @@ import history from './history';
 import store from './store';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Container } from 'react-bootstrap';
+
 
 ReactDOM.render(
   <Container>
