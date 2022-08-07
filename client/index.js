@@ -5,12 +5,16 @@ import { Router } from 'react-router-dom';
 import history from './history';
 import store from './store';
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
+  <Container>
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>
+  </Container>,
   document.getElementById('app')
 );
