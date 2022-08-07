@@ -12,6 +12,7 @@ const users = [
     // name: 'alec',
     // address: '123 Long Island Rd',
     isAdmin: true,
+    device: 'second-brain'
   },
   {
     username: 'kitty@cat.com',
@@ -19,6 +20,7 @@ const users = [
     // name: 'Kitty',
     // address: '33 Catnip Dr, St. Louis, MO',
     isAdmin: true,
+    device: 'icat',
   },
   {
     username: 'pup@frenchie.com',
@@ -26,6 +28,7 @@ const users = [
     // name: 'Oscar',
     // address: '123 Blue Hill Drive, Blue Hill, ME',
     isAdmin: false,
+    device: 'barkpad',
   },
   {
     username: 'bob@bobby.com',
@@ -33,6 +36,7 @@ const users = [
     // name: 'bobby',
     // address: '1 Chicago way, IL',
     isAdmin: false,
+    device: 'cat-chewed-cable'
   },
 ];
 

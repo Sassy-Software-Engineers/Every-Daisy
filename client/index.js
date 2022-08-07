@@ -5,6 +5,7 @@ import { Router } from 'react-router-dom';
 import history from './history';
 import store from './store';
 import App from './App';
+import Cookie from './components/User/Cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Container } from 'react-bootstrap';
@@ -12,6 +13,7 @@ import { Container } from 'react-bootstrap';
 
 ReactDOM.render(
   <Container>
+    <Cookie />
     <Provider store={store}>
       <Router history={history}>
         <App />
