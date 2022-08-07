@@ -6,7 +6,6 @@ const Order = require('./Order');
 const Product = require('./Product');
 const CartItem = require('./CartItem');
 
-
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
@@ -46,9 +45,18 @@ User.prototype.getCartItems = async function () {
   let cart = await Order.findAll({
     where: { userId: this.id, status: 'PENDING' },
   });
-  if (!cart) cart = await Order.create({ where: { userId: this.id } });
-
-  return await Order.findByPk(cart.id, {
+  if (!cart)
+    cart = await Order.create({
+      userId: this.id,
+      status: 'PENDING',
+      quantity: 1,
+    });
+  console.log(
+    Order.findByPk(cart.id, {
+      include: [{ model: CartItem, include: [Product] }],
+    })
+  );
+  return Order.findByPk(cart.id, {
     include: [{ model: CartItem, include: [Product] }],
   });
 };
@@ -59,7 +67,6 @@ User.prototype.addCartItems = async function (product) {
   let cartItem = cart.cartItems.find(
     (cartItem) => cartItem.productId === product.id
   );
-  console.log('CARTITEM', cartItem);
   if (cartItem) {
     cartItem.quantity++;
     await cartItem.save();
@@ -71,6 +78,7 @@ User.prototype.addCartItems = async function (product) {
       price: product.price,
     });
   }
+  console.log('CARTITEM', cartItem);
   return this.getCartItems();
 };
 
