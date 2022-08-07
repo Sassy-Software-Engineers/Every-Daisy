@@ -15,3 +15,6 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+#app {
+  background-color: #d9fff5;
+}
