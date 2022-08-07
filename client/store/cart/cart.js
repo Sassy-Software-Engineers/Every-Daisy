@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const TOKEN = 'token';
+const COOKIE = 'device';
 
 /**
  * ACTION TYPES
@@ -21,13 +22,16 @@ const setCart = (cart) => ({
 export const fetchCart = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
+    const cookie = window.localStorage.getItem(COOKIE);
     const { data } = await axios.get('/api/cart', {
       headers: {
         authorization: token,
+        device: cookie,
       },
     });
     return dispatch(setCart(data));
-  } catch (err) {
+  }
+  catch (err) {
     console.error(err);
   }
 };
@@ -35,13 +39,16 @@ export const fetchCart = () => async (dispatch) => {
 export const setCartAdd = (product) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
+    const cookie = window.localStorage.getItem(COOKIE);
     const { data } = await axios.post('/api/cart/addCartItem', product, {
       headers: {
         authorization: token,
+        device: cookie,
       },
     });
     return dispatch(setCart(data));
-  } catch (err) {
+  }
+  catch (err) {
     console.error(err);
   }
 };
@@ -49,13 +56,16 @@ export const setCartAdd = (product) => async (dispatch) => {
 export const setCartRemove = (product) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
+    const cookie = window.localStorage.getItem(COOKIE);
     const { data } = await axios.post('/api/cart/removeCartItem', product, {
       headers: {
         authorization: token,
+        device: cookie,
       },
     });
     return dispatch(setCart(data));
-  } catch (err) {
+  }
+  catch (err) {
     console.error(err);
   }
 };
@@ -63,7 +73,7 @@ export const setCartRemove = (product) => async (dispatch) => {
 /**
  * REDUCER
  */
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case 'SET_CART':
       return action.cart;
