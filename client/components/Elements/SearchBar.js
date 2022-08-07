@@ -6,12 +6,17 @@ import { fetchCart } from '../../store/cart/cart';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 import './NavBar.css';
 
 export class SearchBar extends React.Component {
+
   componentDidMount() {
     this.props.getCart();
   }
+
   render() {
     let handleClick = this.props.handleClick;
     let isLoggedIn = this.props.isLoggedIn;
@@ -21,7 +26,7 @@ export class SearchBar extends React.Component {
       (accum, cur) => accum + cur.quantity,
       0
     );
-
+    console.log(this.props)
     return (
       <div className="search-bar-container">
         <h1>Every Daisy of the Week</h1>
@@ -32,7 +37,7 @@ export class SearchBar extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
-            <Nav.Link as={NavLink} to="/">Account</Nav.Link>
+            <Nav.Link as={NavLink} to={isLoggedIn ? `/users/${this.props.id}` : '/home'}>Account</Nav.Link>
             {isLoggedIn ? <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
             <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
             }
@@ -40,11 +45,16 @@ export class SearchBar extends React.Component {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-        <div className="search-bar">
-          <label htmlFor="search">Search Products:</label>
-          <input type="text" placeholder="enter your terms..." name="search" />
-          <button>Submit</button>
-        </div>
+    <InputGroup className="col-6">
+          <FormControl
+            placeholder="Search for products"
+            aria-label="Search"
+            aria-describedby="basic-addon2"
+          />
+          <Button variant="outline-secondary" id="button-addon2">
+            Search
+          </Button>
+        </InputGroup>
 
         <div className="cart-icon">
           <Link to={`/cart`}>
@@ -60,6 +70,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     cart: state.cart,
+    id: state.auth.id
   };
 };
 
