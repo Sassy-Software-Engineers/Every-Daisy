@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../../store/products/singleProduct';
-import AddReview as Review from "../Elements/AddReview"
+import AddReview from "../Elements/AddReview"
 import AllReviews from "../Elements/AllReviews"
 
 class SingleProduct extends React.Component {
@@ -24,7 +24,7 @@ class SingleProduct extends React.Component {
           <p>{product.description}</p>
           <p>{product.price}</p>
           <button>Add To Cart</button>
-          <Review> Add Review: </Review>
+          <AddReview> Add Review: </AddReview>
           <AllReviews> All Reviews: </AllReviews>
         </div>
       </div>
