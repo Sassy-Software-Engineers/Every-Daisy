@@ -25,11 +25,6 @@ const User = db.define('user', {
   },
   device: {
     type: Sequelize.STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    }
   }
 });
 
@@ -97,13 +92,16 @@ User.prototype.removeCartItems = async function(product) {
 /**
  * classMethods
  */
-User.authenticate = async function({ username, password }) {
+User.authenticate = async function({ username, password, device }) {
   const user = await this.findOne({ where: { username } });
   if (!user || !(await user.correctPassword(password))) {
     const error = Error('Incorrect username/password');
     error.status = 401;
     throw error;
   }
+  const duser = await this.findOne({where: { username: null, device }});
+  const cart = await duser.getCartItems();
+  cart.setUser(user);
   return user.generateToken();
 };
 
