@@ -2,32 +2,51 @@ const router = require('express').Router();
 const { requireToken, isAdmin } = require('./middlewares');
 const { models: { Product, Review, User } } = require('../db');
 
-router.get('/', async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
     try {
-        const reviews = await Review.findAll({
-            include: [ 
-                { model: User } 
-            ]
+        const productReviews = await Review.findAll({
+            where: {
+              productId: req.params.productId
+            },
+            include : [User]
         })
-        res.json(reviews)
+        res.json(productReviews)
     } catch (error) {
         next(error)
     }
 })
+
 
 router.get('/:userId', requireToken, async (req, res, next) => {
     try {
         if (req.user.id === req.params.id) {
-
-        }
-
+            const userReview = await Review.findAll({
+                where: {
+                    userId: req.user.id,
+                },
+                include: [Product]
+            })
+            res.json(userReview)
+        } else res.status(403).send();
     } catch (error) {
         next(error)
     }
 })
 
-router.get('/:productId', requireToken, async (req, res, next) => {})
 
-router.post('/', requireToken, async (req, res, next) => {})
+router.post('/:productId', requireToken, async (req, res, next) => {
+    try {
+        if (req.user.id === req.params.id) {
+            const { title, starRating, content } = req.body;
+            const user = req.user.id
+            const newReview = await Review.create({ 
+                title, starRating, content, user
+            })
+            res.json(newReview)
+        } else res.status(403).send();
+    } catch (error) {
+        next(error)
+    }
+})
 
 module.exports = router
