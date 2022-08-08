@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 export class AddReview extends React.Component {
     constructor() {
         super();
@@ -52,4 +53,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapDispatchToProps)(AddReview);
+export default connect(null, mapDispatchToProps)(AddReview);
