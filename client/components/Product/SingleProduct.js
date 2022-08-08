@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../../store/products/singleProduct';
+import AllReviews from "../Elements/AllReviews"
+
 class SingleProduct extends React.Component {
   componentDidMount() {
     try {
@@ -21,6 +23,7 @@ class SingleProduct extends React.Component {
           <p>{product.description}</p>
           <p>{product.price}</p>
           <button>Add To Cart</button>
+          <AllReviews> All Reviews: </AllReviews>
         </div>
       </div>
     );

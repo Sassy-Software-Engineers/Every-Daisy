@@ -14,7 +14,6 @@ export class AllReviews extends React.Component {
         return (
           <div>
             <AddReview> Add Review: </AddReview>
-            <h1>All Reviews</h1>
             <ul>
                 {reviews.map((review => {
                     return (
