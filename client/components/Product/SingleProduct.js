@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct } from '../../store/products/singleProduct';
-import Review from "../Elements/Review"
+import Review from "../Elements/AddReview"
 
 class SingleProduct extends React.Component {
   componentDidMount() {
