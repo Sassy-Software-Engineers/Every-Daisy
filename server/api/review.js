@@ -49,4 +49,16 @@ router.post('/:productId', requireToken, async (req, res, next) => {
     }
 })
 
+router.delete('/:productId', requireToken, async (req, res, next) => {
+    try {
+        if (req.user.id === req.params.id) {
+            const review = await Review.findByPk(req.params.productId)
+            await Review.destroy();
+            res.json(review)
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
 module.exports = router
