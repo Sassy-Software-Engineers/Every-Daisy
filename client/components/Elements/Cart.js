@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 export class Cart extends React.Component {
   constructor() {
     super();
-    this.handleAdd = this.handleAdd.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidMount() {
+    console.log('COMPONENT DID MOUNT! Props:', this.props);
     this.props.fetchCart();
   }
   handleAdd(e) {
@@ -24,31 +25,33 @@ export class Cart extends React.Component {
 
   render() {
     // i dont know how the state will show up -> what path to use to find the product so im just guessing for now
-    let cart = this.state.cart;
-    let cartItems = cart.cartItems || []
+    let cart = this.props.cart;
+    let cartItems = cart.cartItems || [];
     let totalPrice = cartItems.reduce(
-      (accum, cur) => accum + cur.price * cur.quantity,
+      (accum, cur) => accum + cur.product.price * cur.quantity,
       0
     );
+
     return (
       <div className="cart-component">
         {cartItems.length > 0 ? (
           cartItems.map((cartItem) => {
             return (
-              <div key={cartItem.id} style={{border:'1px solid'}}>
-               <Link to={`/products/${cartItem.productId}`}><h2>{cartItem.product.title}</h2></Link>
-
-               <div className='quantity'>
-                <small>{cartItem.quantity}</small>
-                {/* find the total price for each item based on how many you're buying */}
-                <button value={cartItem.product} onClick={this.handleAdd}>
-                  +
-                </button>
-                <button value={cartItem.product} onClick={this.handleRemove}>
-                  -
-                </button>
+              <div key={cartItem.id} style={{ border: '1px solid' }}>
+                <Link to={`/products/${cartItem.productId}`}>
+                  <h2>{cartItem.product.title}</h2>
+                </Link>
+                <div className="quantity">
+                  <small>{cartItem.quantity}</small>
+                  {/* find the total price for each item based on how many you're buying */}
+                  <button value={cartItem.product} onClick={this.handleAdd}>
+                    +
+                  </button>
+                  <button value={cartItem.product} onClick={this.handleRemove}>
+                    -
+                  </button>
                 </div>
-                <p>{cartItem.price * cartItem.quantity}</p>
+                <p>{cartItem.product.price * cartItem.quantity}</p>
               </div>
             );
           })
@@ -71,7 +74,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: () => dispatch(fetchCart()),
+    fetchCart: () => dispatch(fetchCart()),
     addToCart: (product) => dispatch(setCartAdd(product)),
     removeFromCart: (product) => dispatch(setCartRemove(product)),
   };
