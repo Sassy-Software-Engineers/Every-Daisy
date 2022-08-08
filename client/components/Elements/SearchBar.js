@@ -38,8 +38,12 @@ export class SearchBar extends React.Component {
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
             <Nav.Link as={NavLink} to={isLoggedIn ? `/users/${this.props.id}` : '/home'}>Account</Nav.Link>
-            {isLoggedIn ? <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
-            <Nav.Link as={NavLink} to="/login">Login/Signup</Nav.Link>
+            {isLoggedIn ? 
+            <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
+            <div>
+              <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+              <Nav.Link as={NavLink} to="/signup">Signup</Nav.Link>
+            </div>
             }
           </Nav>
         </Navbar.Collapse>
