@@ -25,17 +25,21 @@ export class Cart extends React.Component {
 
   render() {
     // i dont know how the state will show up -> what path to use to find the product so im just guessing for now
-    let cart = this.props.cart;
-    let cartItems = cart.cartItems || [];
-    let totalPrice = cartItems.reduce(
-      (accum, cur) => accum + cur.product.price * cur.quantity,
-      0
-    );
+    let cart = this.props.cart; // this.props.cart ? cart = this.props.cart : null;
+    let cartItems = cart.cartItems || []; // cart.length > 0 ? let cartItems = cart.cartItems : cartItems = []
+    console.log('cartItems', cartItems);
+    let totalPrice = cartItems
+      ? cartItems.reduce(
+          (accum, cur) => accum + +cur.product.price * cur.quantity,
+          0
+        )
+      : null;
 
     return (
       <div className="cart-component">
         {cartItems.length > 0 ? (
           cartItems.map((cartItem) => {
+            console.log('cartItem in map', cartItem);
             return (
               <div key={cartItem.id} style={{ border: '1px solid' }}>
                 <Link to={`/products/${cartItem.productId}`}>
@@ -44,10 +48,16 @@ export class Cart extends React.Component {
                 <div className="quantity">
                   <small>{cartItem.quantity}</small>
                   {/* find the total price for each item based on how many you're buying */}
-                  <button value={cartItem.product} onClick={this.handleAdd}>
+                  <button
+                    value={cartItem.product}
+                    onClick={() => this.props.addToCart(cartItem.product)}
+                  >
                     +
                   </button>
-                  <button value={cartItem.product} onClick={this.handleRemove}>
+                  <button
+                    value={cartItem.product}
+                    onClick={() => this.props.removeFromCart(cartItem.product)}
+                  >
                     -
                   </button>
                 </div>
