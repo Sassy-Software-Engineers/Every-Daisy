@@ -72,13 +72,13 @@ export class AllProducts extends React.Component {
               }
             })
             .map((product) => {
-       // might need to change product.reviews to whatever the path is to get each review
+              // might need to change product.reviews to whatever the path is to get each review
               let averageRating = Math.floor(
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
                 }, 0) / product.reviews.length
               );
-              
+
               return (
                 <div
                   className="products-container"
@@ -107,7 +107,11 @@ export class AllProducts extends React.Component {
 
                   <div>
                     <small>${product.price}</small>{' '}
-                    <button value={product} onClick={this.handleClick}>
+                    <button
+                      onClick={() => {
+                        return this.props.addItem(product);
+                      }}
+                    >
                       ADD TO CART
                     </button>
                   </div>
@@ -122,7 +126,6 @@ export class AllProducts extends React.Component {
                       );
                     })}
                   </div>
-
                 </div>
               );
             })

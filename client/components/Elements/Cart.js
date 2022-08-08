@@ -26,13 +26,12 @@ export class Cart extends React.Component {
   render() {
     // i dont know how the state will show up -> what path to use to find the product so im just guessing for now
     let cart = this.props.cart;
-    console.log('THIS CART', cart);
     let cartItems = cart.cartItems || [];
-    console.log('CART ITEMS', cartItems);
     let totalPrice = cartItems.reduce(
-      (accum, cur) => accum + cur.price * cur.quantity,
+      (accum, cur) => accum + cur.product.price * cur.quantity,
       0
     );
+
     return (
       <div className="cart-component">
         {cartItems.length > 0 ? (
@@ -52,7 +51,7 @@ export class Cart extends React.Component {
                     -
                   </button>
                 </div>
-                <p>{cartItem.price * cartItem.quantity}</p>
+                <p>{cartItem.product.price * cartItem.quantity}</p>
               </div>
             );
           })
