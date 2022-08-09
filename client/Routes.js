@@ -1,15 +1,15 @@
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/Auth/AuthForm';
 import Home from './components/Home/Home';
-import {me} from './store'
+import { me } from './store';
 import AllProducts from './components/Product/AllProducts';
 // import EditProduct from './components/EditProduct';
 import SingleProduct from './components/Product/SingleProduct';
-import Cart from "./components/Elements/Cart"
+import Cart from './components/Elements/Cart';
 import Cookie from './components/User/Cookie';
-
+import Checkout from './components/Checkout/Checkout';
 
 /**
  * COMPONENT
@@ -20,21 +20,20 @@ class Routes extends Component {
   }
 
   render() {
-
     return (
       <div>
-          <Switch>
-            <Route exact path='/'  component={Home} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route path="/home">
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route path="/home">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
       </div>
     );
   }
@@ -43,20 +42,20 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       Cookie();
       dispatch(me());
-    }
+    },
   };
 };
 
