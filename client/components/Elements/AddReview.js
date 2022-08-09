@@ -22,7 +22,7 @@ export class AddReview extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addReview(this.state);
+    this.props.addReview(this.props.product.id, this.state);
     this.setState({
       title: '',
       content: '',
@@ -58,11 +58,16 @@ export class AddReview extends React.Component {
     );
   }
 }
+const mapState = (state) => {
+  return {
+    product: state.singleProduct
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReview: (review) => dispatch(addNewReview(review)),
+    addReview: (productId,review) => dispatch(addNewReview(productId, review)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddReview);
+export default connect(mapState, mapDispatchToProps)(AddReview);

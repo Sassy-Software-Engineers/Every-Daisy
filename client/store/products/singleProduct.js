@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+
+const TOKEN = 'token';
+
+
 /**
  * ACTION TYPES
  */
@@ -39,10 +43,15 @@ export const updateProduct = (product) => {
     dispatch(updatedProduct(data));
   };
 };
-export const addNewReview = (review) => {
+export const addNewReview = (productId, review) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/products/${product.id}`, review);
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.post(`/api/products/${productId}`, review, {
+        headers: {
+          authorization: token,
+        }
+      });
       dispatch(addReview(data));
     } catch (error) {
         console.error(error);
@@ -62,7 +71,7 @@ export default function (state = initialState, action) {
     case UPDATE_PRODUCT:
       return { ...action.product };
     case ADD_REVIEW: 
-      return [...state.reviews, action.review]
+      return {...state, reviews: [...state.reviews, action.review]}
     default:
       return state;
   }
