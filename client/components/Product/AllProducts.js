@@ -4,6 +4,10 @@ import { fetchCategories } from '../../store/categories/allCategories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchCart, setCartAdd } from '../../store/cart/cart';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import './Products.css'
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -35,29 +39,27 @@ export class AllProducts extends React.Component {
     let currentFilter = this.state.filter;
 
     return (
-      <div
-        className="products-component"
-        style={{
-          margin: 'auto',
-          textAlign: 'center',
-          fontFamily: 'Consolas, monaco, monospace',
-        }}
-      >
-        <h1 style={{ color: '#96716B' }}>
+      <div className="products-component">
+        <h1>
           Every plant you see is cat or dog safe for your furry little friends!
         </h1>
 
         <div className="category-filter">
-          <select onChange={this.handleChange}>
-            <option value="all">Show All</option>
+          <Dropdown onChange={this.handleChange}>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Filter
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+            <Dropdown.Item value="all">Show All</Dropdown.Item>
             {categories.map((category) => {
               return (
-                <option key={category.id} value={category.name}>
+                <Dropdown.Item key={category.id} value={category.name}>
                   {category.name}
-                </option>
+                </Dropdown.Item>
               );
             })}
-          </select>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
 
         {
@@ -80,52 +82,34 @@ export class AllProducts extends React.Component {
               );
 
               return (
-                <div
-                  className="products-container"
-                  key={product.id}
-                  style={{
-                    border: '6px solid #7A968C',
-                    borderRadius: '25px ',
-                    marginTop: '20px',
-                    backgroundColor: '#E8DBD1',
-                    padding: '5px',
-                  }}
-                >
-                  <Link to={`/products/${product.id}`}>
-                    <h1 style={{ color: '#96716B' }}>{product.title}</h1>
-                  </Link>
+                <div className="products-container" key={product.id}>
+                  <Card className='card'>
+                    <Link className='card-title' to={`/products/${product.id}`}>
+                      <Card.Title >{product.title}</Card.Title>
+                    </Link>
+                    <Card.Img className='card-img' src={product.image} />
+                    <Card.Body>
+                      <small>${product.price}</small>{' '}
+                      <Button
+                        onClick={() => {
+                          return this.props.addItem(product);
+                        }}
+                      >
+                        ADD TO CART
+                      </Button>
+                    </Card.Body>
 
-                  <img
-                    src={product.image}
-                    style={{
-                      width: '15rem',
-                      height: '15rem',
-                      borderRadius: '25%',
-                      border: '4px solid #7A968C',
-                    }}
-                  />
-
-                  <div>
-                    <small>${product.price}</small>{' '}
-                    <button
-                      onClick={() => {
-                        return this.props.addItem(product);
-                      }}
-                    >
-                      ADD TO CART
-                    </button>
-                  </div>
-
-                  <div className="star-rating">
-                    {[...Array({ averageRating })].map((star, index) => {
-                      index += 1;
-                      return (
-                        <span className="star" key={index}>
-                          &#9733;
-                        </span>
-                      );
-                    })}
-                  </div>
+                    <div className="star-rating">
+                      {[...Array({ averageRating })].map((star, index) => {
+                        index += 1;
+                        return (
+                          <span className="star" key={index}>
+                            &#9733;
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </Card>
                 </div>
               );
             })
