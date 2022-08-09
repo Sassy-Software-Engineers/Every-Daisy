@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import SearchBar from './components/Elements/SearchBar'
-import Routes from './Routes'
+import SearchBar from './components/Nav/SearchBar';
+import Routes from './components/Routes';
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <SearchBar />
       <Routes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

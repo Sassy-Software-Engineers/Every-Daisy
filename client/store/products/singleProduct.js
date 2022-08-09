@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-
 const TOKEN = 'token';
-
-
 /**
  * ACTION TYPES
  */
@@ -38,8 +35,13 @@ export const fetchProduct = (id) => {
   };
 };
 export const updateProduct = (product) => {
+  console.log('product in update product thunk', product);
+  const token = window.localStorage.getItem(TOKEN);
+
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/products/${product.id}`, product);
+    const { data } = await axios.put(`/api/products/${product.id}`, product, {
+      headers: { authorization: token },
+    });
     dispatch(updatedProduct(data));
   };
 };
