@@ -22,7 +22,7 @@
     transition: 100ms;
 }
 .products-container .card{
-    width:90% !important;
+
     border: 3px solid #6b8f71ff;
 }
 .products-component h1 {
