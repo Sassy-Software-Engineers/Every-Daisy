@@ -88,7 +88,7 @@ class SingleProduct extends React.Component {
                   onChange={handleChange}
                   type="number"
                 />
-                <Form.Label>Stock</Form.Label>
+                <Form.Label htmlFor="quantity">Stock</Form.Label>
                 <Form.Control
                   name="quantity"
                   value={quantity}
