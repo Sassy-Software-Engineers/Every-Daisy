@@ -48,3 +48,12 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
     next(e);
   }
 });
+
+// router.post('/:productId/reviews', requireToken, async (req, res, next) => {
+//   try {
+//     const review = await Product.
+
+//   } catch (error) {
+//     next(error);
+//   }
+// });
