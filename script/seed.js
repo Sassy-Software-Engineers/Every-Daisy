@@ -132,31 +132,31 @@ const reviews = [
     starRating: 4,
     title: 'Amazing!',
     content: 'best plant ever, i love it so much',
-    plantId: 6,
+    productId: 6,
   },
   {
     starRating: 5,
     title: 'im so happy!',
     content: 'my cat loves to play with this',
-    plantId: 1,
+    productId: 1,
   },
   {
     starRating: 3,
     title: 'good but it died',
     content: 'gave it too much water and it died but it was pretty!',
-    plantId: 3,
+    productId: 3,
   },
   {
     starRating: 4,
     title: 'favorite thing',
     content: 'love this plant almost as much as my pets!',
-    plantId: 3,
+    productId: 3,
   },
   {
     starRating: 5,
     title: 'need more of these',
     content: 'gonna buy more and fill my whole house with these<3',
-    plantId: 7,
+    productId: 7,
   },
 
 ];
