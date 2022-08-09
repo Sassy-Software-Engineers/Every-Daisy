@@ -90,8 +90,10 @@ User.prototype.removeCartItems = async function (product) {
 
 User.prototype.createOrder = async function () {
   let cart = await this.getCartItems();
-  cart.status = 'PROCESSING';
-  await cart.save();
+  if (cart.cartItems.length > 0) {
+    cart.status = 'PROCESSING';
+    await cart.save();
+  }
   return this.getCartItems();
 };
 /**
