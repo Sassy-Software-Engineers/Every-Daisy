@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import allProducts from '../../store/products/allProducts';
 import AddReview from "./AddReview"
+import {fetchReviews} from "../../store/reviews/reviews"
 
 
 export class AllReviews extends React.Component {
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps)(AllReviews);
