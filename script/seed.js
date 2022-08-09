@@ -133,32 +133,36 @@ const reviews = [
     title: 'Amazing!',
     content: 'best plant ever, i love it so much',
     productId: 6,
+    userId: 2,
   },
   {
     starRating: 5,
     title: 'im so happy!',
     content: 'my cat loves to play with this',
     productId: 1,
+    userId: 1,
   },
   {
     starRating: 3,
     title: 'good but it died',
     content: 'gave it too much water and it died but it was pretty!',
     productId: 3,
+    userId: 4,
   },
   {
     starRating: 4,
     title: 'favorite thing',
     content: 'love this plant almost as much as my pets!',
     productId: 3,
+    userId: 3,
   },
   {
     starRating: 5,
     title: 'need more of these',
     content: 'gonna buy more and fill my whole house with these<3',
     productId: 7,
+    userId: 2,
   },
-
 ];
 async function seed() {
   await db.sync({ force: true });
@@ -182,9 +186,7 @@ async function seed() {
   const [newCategories] = await Promise.all(
     categories.map((c) => Category.create(c))
   );
-  const [newReviews] = await Promise.all(
-    reviews.map((c) => Review.create(c))
-  );
+  const [newReviews] = await Promise.all(reviews.map((c) => Review.create(c)));
 
   let herb = await Category.findOne({ where: { name: 'herb' } });
   let flowering = await Category.findOne({ where: { name: 'flowering' } });
