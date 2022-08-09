@@ -6,13 +6,13 @@ const TOKEN = 'token';
 /**
  * ACTION TYPES
  */
- 
+
 const SET_CART = 'SET_CART';
 
 /**
  * ACTION CREATORS
  */
- 
+
 export const setCart = (cart) => ({
   type: SET_CART,
   cart,
@@ -21,7 +21,7 @@ export const setCart = (cart) => ({
 /**
  * THUNK CREATORS
  */
- 
+
 export const fetchCart = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
@@ -33,8 +33,7 @@ export const fetchCart = () => async (dispatch) => {
       },
     });
     return dispatch(setCart(data));
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err);
   }
 };
@@ -50,8 +49,7 @@ export const setCartAdd = (product) => async (dispatch) => {
       },
     });
     return dispatch(setCart(data));
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err);
   }
 };
@@ -67,8 +65,23 @@ export const setCartRemove = (product) => async (dispatch) => {
       },
     });
     return dispatch(setCart(data));
+  } catch (err) {
+    console.error(err);
   }
-  catch (err) {
+};
+
+export const setOrder = (product) => async (dispatch) => {
+  try {
+    const token = window.localStorage.getItem(TOKEN);
+    const cookie = window.localStorage.getItem(COOKIE);
+    const { data } = await axios.post('/api/cart/createOrder', {
+      headers: {
+        authorization: token,
+        device: cookie,
+      },
+    });
+    return dispatch(setCart(data));
+  } catch (err) {
     console.error(err);
   }
 };
@@ -76,8 +89,8 @@ export const setCartRemove = (product) => async (dispatch) => {
 /**
  * REDUCER
  */
- 
-export default function(state = {}, action) {
+
+export default function (state = {}, action) {
   switch (action.type) {
     case 'SET_CART':
       return action.cart;
