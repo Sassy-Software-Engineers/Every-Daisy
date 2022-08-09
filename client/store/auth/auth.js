@@ -1,6 +1,7 @@
 import axios from 'axios';
 import history from '../../history';
 import { COOKIE } from '../../components/User/Cookie';
+import { fetchCart } from '../cart/cart';
 
 const TOKEN = 'token';
 
@@ -25,6 +26,7 @@ export const me = () => async dispatch => {
         authorization: token
       }
     });
+    dispatch(fetchCart());
     return dispatch(setAuth(res.data));
   }
 };
@@ -43,8 +45,9 @@ export const authenticate = (username, password, method) => async dispatch => {
   }
 };
 
-export const logout = () => {
+export const logout = () => async dispatch => {
   window.localStorage.removeItem(TOKEN);
+  dispatch(fetchCart());
   history.push('/');
   return {
     type: SET_AUTH,

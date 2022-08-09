@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { COOKIE } from '../../components/User/Cookie';
 
 const TOKEN = 'token';
-const COOKIE = 'device';
 
 /**
  * ACTION TYPES
@@ -21,6 +21,7 @@ export const setCart = (cart) => ({
 /**
  * THUNK CREATORS
  */
+ 
 export const fetchCart = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);

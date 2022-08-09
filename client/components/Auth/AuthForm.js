@@ -29,9 +29,8 @@ const AuthForm = props => {
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
-  )
-}
-
+  );
+};
 /**
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
