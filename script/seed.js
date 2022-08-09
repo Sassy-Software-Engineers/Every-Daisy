@@ -12,7 +12,7 @@ const users = [
     // name: 'alec',
     // address: '123 Long Island Rd',
     isAdmin: true,
-    device: 'second-brain'
+    device: 'second-brain',
   },
   {
     username: 'kitty@cat.com',
@@ -36,7 +36,7 @@ const users = [
     // name: 'bobby',
     // address: '1 Chicago way, IL',
     isAdmin: false,
-    device: 'cat-chewed-cable'
+    device: 'cat-chewed-cable',
   },
 ];
 
@@ -112,6 +112,11 @@ async function seed() {
   const [newCategories] = await Promise.all(
     categories.map((c) => Category.create(c))
   );
+
+  let catnip = await Product.findOne({ where: { id: 1 } });
+  let herb = await Category.findOne({ where: { id: 1 } });
+
+  await catnip.addCategory(herb);
 
   console.log(
     `seeded ${users.length} users, ${products.length} products, ${orders.length} orders, ${categories.length} categories`
