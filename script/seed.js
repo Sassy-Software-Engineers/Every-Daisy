@@ -219,11 +219,6 @@ async function seed() {
   await Venus.setCategories([carnivorous, easy]);
   await Burro.setCategories([succulent, easy]);
 
-  let catnip = await Product.findOne({ where: { id: 1 } });
-  let herb = await Category.findOne({ where: { id: 1 } });
-
-  await catnip.addCategory(herb);
-
   console.log(
     `seeded ${users.length} users, ${products.length} products, ${orders.length} orders, ${categories.length} categories`
   );

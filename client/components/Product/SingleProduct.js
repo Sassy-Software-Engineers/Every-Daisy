@@ -5,8 +5,8 @@ import {
   updateProduct,
 } from '../../store/products/singleProduct';
 import { setCartAdd } from '../../store/cart/cart';
-import AddReview from '../Elements/AddReview';
-import AllReviews from '../Elements/AllReviews';
+import AddReview from '../Reviews/AddReview';
+import AllReviews from '../Reviews/AllReviews';
 import './Products.css';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
@@ -40,7 +40,7 @@ class SingleProduct extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.updateProduct({ ...this.props.product, ...this.state });
-    this.props.getCampus(this.props.match.params.id);
+    this.props.fetchProduct(this.props.match.params.id);
   }
 
   componentDidMount() {
@@ -74,12 +74,27 @@ class SingleProduct extends React.Component {
           {auth.isAdmin && (
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
-                <Form.Control name='title' value={title} onChange={handleChange} />
-                <Form.Label>Price</Form.Label>
-                <Form.Control name='price' value={price} onChange={handleChange} />
+                <Form.Label htmlFor="title">Title</Form.Label>
+                <Form.Control
+                  name="title"
+                  value={title}
+                  onChange={handleChange}
+                  type="text"
+                />
+                <Form.Label htmlFor="price">Price</Form.Label>
+                <Form.Control
+                  name="price"
+                  value={price}
+                  onChange={handleChange}
+                  type="number"
+                />
                 <Form.Label>Stock</Form.Label>
-                <Form.Control name='quantity' value={quantity} onChange={handleChange}/>
+                <Form.Control
+                  name="quantity"
+                  value={quantity}
+                  onChange={handleChange}
+                  type="number"
+                />
               </Form.Group>
               <Button variant="outline-dark" type="submit">
                 Submit
@@ -105,7 +120,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => ({
   fetchProduct: (id) => dispatch(fetchProduct(id)),
   addToCart: (product) => dispatch(setCartAdd(product)),
-  updateProduct: (product) => dispatch(updateProduct(product))
+  updateProduct: (product) => dispatch(updateProduct(product)),
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);

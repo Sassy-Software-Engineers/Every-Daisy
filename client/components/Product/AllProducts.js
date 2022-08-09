@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchCart, setCartAdd } from '../../store/cart/cart';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import './Products.css'
+import './Products.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 export class AllProducts extends React.Component {
@@ -46,18 +46,18 @@ export class AllProducts extends React.Component {
 
         <div className="category-filter">
           <Dropdown onChange={this.handleChange}>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Filter
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-            <Dropdown.Item value="all">Show All</Dropdown.Item>
-            {categories.map((category) => {
-              return (
-                <Dropdown.Item key={category.id} value={category.name}>
-                  {category.name}
-                </Dropdown.Item>
-              );
-            })}
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Filter
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item value="all">Show All</Dropdown.Item>
+              {categories.map((category) => {
+                return (
+                  <Dropdown.Item key={category.id} value={category.name}>
+                    {category.name}
+                  </Dropdown.Item>
+                );
+              })}
             </Dropdown.Menu>
           </Dropdown>
         </div>
@@ -83,11 +83,11 @@ export class AllProducts extends React.Component {
 
               return (
                 <div className="products-container" key={product.id}>
-                  <Card className='card'>
-                    <Link className='card-title' to={`/products/${product.id}`}>
-                      <Card.Title >{product.title}</Card.Title>
+                  <Card className="card">
+                    <Link className="card-title" to={`/products/${product.id}`}>
+                      <Card.Title>{product.title}</Card.Title>
                     </Link>
-                    <Card.Img className='card-img' src={product.image} />
+                    <Card.Img className="card-img" src={product.image} />
                     <Card.Body>
                       <small>${product.price}</small>{' '}
                       <Button
