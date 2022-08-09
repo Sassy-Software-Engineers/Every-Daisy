@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-dom';
-import { fetchCart, setCartAdd, setCartRemove } from '../../store/cart/cart';
+import { fetchCart, setOrder } from '../../store/cart/cart';
 
 export class Checkout extends React.Component {
   componentDidMount() {
@@ -50,5 +50,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchCart: () => dispatch(fetchCart()),
+    setOrder: () => dispatch(setOrder()),
   };
 };

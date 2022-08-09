@@ -70,7 +70,7 @@ export const setCartRemove = (product) => async (dispatch) => {
   }
 };
 
-export const setOrder = (product) => async (dispatch) => {
+export const setOrder = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
     const cookie = window.localStorage.getItem(COOKIE);
