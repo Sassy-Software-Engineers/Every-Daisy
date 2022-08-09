@@ -106,9 +106,23 @@ User.authenticate = async function ({ username, password, device }) {
     error.status = 401;
     throw error;
   }
-  const duser = await this.findOne({ where: { username: null, device } });
-  const cart = await duser.getCartItems();
-  cart.setUser(user);
+  const cart = await user.getCartItems();
+  const dUser = await this.findByDevice(device);
+  if (dUser) {
+    const dCart = await dUser.getCartItems();
+    if (cart.cartItems.length < 1 && dCart.cartItems.length > 0) {
+      await cart.destroy();
+      await dCart.setUser(user);
+    }
+    else {
+      const { cartItems } = dCart;
+      for (let item of cartItems) {
+        item.setOrder(cart);
+      }
+      await dCart.destroy();
+    }
+    await dUser.destroy();
+  }
   return user.generateToken();
 };
 
@@ -129,7 +143,12 @@ User.findByToken = async function (token) {
 
 User.findByDevice = async function (device) {
   try {
-    const user = User.findOne({ where: { device } });
+    const user = await User.findOne({
+      where: {
+        device,
+        username: null
+      }
+    });
     if (!user) {
       return null;
     }
@@ -150,7 +169,6 @@ const hashPassword = async (user) => {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 };
-
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));

@@ -1,6 +1,4 @@
-import React from 'react';
-
-const COOKIE = 'device';
+export const COOKIE = 'device';
 
 const keyGen = () => {
     const nav = window.navigator;

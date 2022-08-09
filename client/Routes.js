@@ -8,6 +8,7 @@ import AllProducts from './components/Product/AllProducts';
 // import EditProduct from './components/EditProduct';
 import SingleProduct from './components/Product/SingleProduct';
 import Cart from "./components/Elements/Cart"
+import Cookie from './components/User/Cookie';
 
 
 /**
@@ -53,6 +54,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
+      Cookie();
       dispatch(me());
     }
   };
