@@ -49,11 +49,25 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// router.post('/:productId/reviews', requireToken, async (req, res, next) => {
-//   try {
-//     const review = await Product.
+router.post('/:productId', requireToken, async (req, res, next) => {
+  try {
+      const { title, starRating, content } = req.body;
+      const user = req.user.id
+      const newReview = await Review.create({ 
+          title, starRating, content, user
+      })
+      res.json(newReview)
+  } catch (error) {
+    next(error);
+  }
+});
 
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.delete('/:productId/reviews/:reviewsId', requireToken, async (req, res, next) => {
+  try {
+    const review = await Review.findByPk(req.params.reviewsId)
+    await Review.destory();
+    res.json(review)
+  } catch (error) {
+    next(error);
+  }
+})

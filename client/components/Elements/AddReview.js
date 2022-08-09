@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addNewReview } from '../../store/products/singleProduct';
 
 
 export class AddReview extends React.Component {
@@ -9,6 +10,8 @@ export class AddReview extends React.Component {
       title: '',
       content: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -32,7 +35,7 @@ export class AddReview extends React.Component {
     return (
       <div>
         <form id="ProductReview-form" onSubmit={handleSubmit}>
-          <label>Title:</label>
+          <label htmlFor="title">Title:</label>
           <input
             type="text"
             name="title"
@@ -41,13 +44,12 @@ export class AddReview extends React.Component {
             required
           />
 
-          <label>Review:</label>
+          <label htmlFor="content">Review:</label>
           <input
             type="text"
-            name="review"
+            name="content"
             value={content}
             onChange={handleChange}
-            required
           />
 
           <button type="submit">Submit</button>
