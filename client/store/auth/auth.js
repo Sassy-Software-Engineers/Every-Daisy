@@ -47,8 +47,8 @@ export const authenticate = (username, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   window.localStorage.removeItem(TOKEN);
-  dispatch(fetchCart());
   history.push('/');
+  dispatch(fetchCart());
   return {
     type: SET_AUTH,
     auth: {}
