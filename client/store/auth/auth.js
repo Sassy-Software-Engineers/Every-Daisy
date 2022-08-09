@@ -1,8 +1,8 @@
 import axios from 'axios';
 import history from '../../history';
+import { COOKIE } from '../../components/User/Cookie';
 
 const TOKEN = 'token';
-const COOKIE = 'device';
 
 /**
  * ACTION TYPES
@@ -12,7 +12,7 @@ const SET_AUTH = 'SET_AUTH';
 /**
  * ACTION CREATORS
  */
-const setAuth = auth => ({type: SET_AUTH, auth});
+const setAuth = auth => ({ type: SET_AUTH, auth });
 
 /**
  * THUNK CREATORS
@@ -32,13 +32,14 @@ export const me = () => async dispatch => {
 export const authenticate = (username, password, method) => async dispatch => {
   try {
     const device = window.localStorage.getItem(COOKIE);
-    const resp = {username, password, device};
+    const resp = { username, password, device };
     const res = await axios.post(`/auth/${method}`, resp);
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
     history.push('/');
-  } catch (authError) {
-    return dispatch(setAuth({error: authError}));
+  }
+  catch (authError) {
+    return dispatch(setAuth({ error: authError }));
   }
 };
 

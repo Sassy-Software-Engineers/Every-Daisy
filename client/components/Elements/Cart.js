@@ -6,22 +6,22 @@ import { Link } from 'react-router-dom';
 export class Cart extends React.Component {
   constructor() {
     super();
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
+    // this.handleAdd = this.handleAdd.bind(this);
+    // this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidMount() {
     console.log('COMPONENT DID MOUNT! Props:', this.props);
     this.props.fetchCart();
   }
-  handleAdd(e) {
-    this.props.addToCart(e.target.value);
-    this.props.fetchCart();
-  }
-  handleRemove(e) {
-    this.props.removeFromCart(e.target.value);
-    this.props.fetchCart();
-  }
+  // handleAdd(e) {
+  //   this.props.addToCart(e.target.value);
+  //   this.props.fetchCart();
+  // }
+  // handleRemove(e) {
+  //   this.props.removeFromCart(e.target.value);
+  //   this.props.fetchCart();
+  // }
 
   render() {
     // i dont know how the state will show up -> what path to use to find the product so im just guessing for now

@@ -6,12 +6,14 @@ const COOKIE = 'device';
 /**
  * ACTION TYPES
  */
+ 
 const SET_CART = 'SET_CART';
 
 /**
  * ACTION CREATORS
  */
-const setCart = (cart) => ({
+ 
+export const setCart = (cart) => ({
   type: SET_CART,
   cart,
 });
@@ -73,6 +75,7 @@ export const setCartRemove = (product) => async (dispatch) => {
 /**
  * REDUCER
  */
+ 
 export default function(state = {}, action) {
   switch (action.type) {
     case 'SET_CART':
