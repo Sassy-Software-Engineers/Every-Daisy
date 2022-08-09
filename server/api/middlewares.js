@@ -50,10 +50,8 @@ const signup = async (req, res, next) => {
   try {
     const { device, username, password } = req.body;
     const user = await User.findByDevice(device);
-    let saved;
-    if (!user) saved = await User.create(req.body);
-    else saved = await user.update({ username, password });
-    req.user = saved;
+    if (!user) req.user = await User.create(req.body);
+    else req.user = await user.update({ username, password });
     next();
   }
   catch (error) { next(error) }

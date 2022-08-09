@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const COOKIE = 'device';
 
 const keyGen = () => {

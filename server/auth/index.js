@@ -22,7 +22,6 @@ router.post('/signup', signup, async (req, res, next) => {
 router.get('/me', async (req, res, next) => {
   try {
     let user = await User.findByToken(req.headers.authorization);
-    user.cart = user.getCartItems();
     res.send(user);
   }
   catch (ex) {
