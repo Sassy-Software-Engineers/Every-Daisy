@@ -26,7 +26,6 @@ export class SearchBar extends React.Component {
       (accum, cur) => accum + cur.quantity,
       0
     );
-    console.log(this.props)
     return (
       <div className="search-bar-container">
         <h1>Every Daisy of the Week</h1>

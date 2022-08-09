@@ -1,17 +1,19 @@
 import axios from 'axios';
+import { COOKIE } from '../../components/User/Cookie';
 
 const TOKEN = 'token';
-const COOKIE = 'device';
 
 /**
  * ACTION TYPES
  */
+ 
 const SET_CART = 'SET_CART';
 
 /**
  * ACTION CREATORS
  */
-const setCart = (cart) => ({
+ 
+export const setCart = (cart) => ({
   type: SET_CART,
   cart,
 });
@@ -19,6 +21,7 @@ const setCart = (cart) => ({
 /**
  * THUNK CREATORS
  */
+ 
 export const fetchCart = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
@@ -73,6 +76,7 @@ export const setCartRemove = (product) => async (dispatch) => {
 /**
  * REDUCER
  */
+ 
 export default function(state = {}, action) {
   switch (action.type) {
     case 'SET_CART':
