@@ -25,6 +25,5 @@ router.post('/create-payment-intent', findRelevantUser, async (req, res) => {
       enabled: true,
     },
   });
-  console.log(paymentIntent.client_secret);
   res.send(paymentIntent.client_secret);
 });
