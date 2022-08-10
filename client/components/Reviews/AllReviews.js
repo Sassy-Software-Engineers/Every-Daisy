@@ -5,7 +5,6 @@ export class AllReviews extends React.Component {
 
     render() {
         const reviews = this.props.product.reviews
-        console.log(reviews)
         return (
           <div>
             <h1>All Reviews:</h1>

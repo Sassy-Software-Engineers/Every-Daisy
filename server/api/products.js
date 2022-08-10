@@ -51,10 +51,10 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
 
 router.post('/:productId', requireToken, async (req, res, next) => {
   try {
-      const { title, content } = req.body;
+      const { title, content, starRating } = req.body;
       const user = req.user.id
       const newReview = await Review.create({ 
-          title, starRating, content, user
+          title, starRating, content
       })
       res.json(newReview)
   } catch (error) {

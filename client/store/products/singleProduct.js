@@ -60,13 +60,11 @@ export const addNewReview = (productId, review) => {
     }
   }
 }
-const initialState = {
-  reviews: [],
-}
+
 /**
  * REDUCER
  */
-export default function (state = initialState, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case GET_PRODUCT:
       return action.product;
