@@ -2,31 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, setCartAdd, setCartRemove } from '../store/cart/cart';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import './Cart.css'
+import Card from 'react-bootstrap/Card';
 
 export class Cart extends React.Component {
   constructor() {
     super();
-    // this.handleAdd = this.handleAdd.bind(this);
-    // this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidMount() {
-    console.log('COMPONENT DID MOUNT! Props:', this.props);
     this.props.fetchCart();
   }
-  // handleAdd(e) {
-  //   this.props.addToCart(e.target.value);
-  //   this.props.fetchCart();
-  // }
-  // handleRemove(e) {
-  //   this.props.removeFromCart(e.target.value);
-  //   this.props.fetchCart();
-  // }
+
 
   render() {
-    // i dont know how the state will show up -> what path to use to find the product so im just guessing for now
-    let cart = this.props.cart; // this.props.cart ? cart = this.props.cart : null;
-    let cartItems = cart.cartItems || []; // cart.length > 0 ? let cartItems = cart.cartItems : cartItems = []
+    let cart = this.props.cart; 
+    let cartItems = cart.cartItems || [];
     console.log('cartItems', cartItems);
     let totalPrice = cartItems
       ? cartItems.reduce(
@@ -36,42 +28,41 @@ export class Cart extends React.Component {
       : null;
 
     return (
-      <div className="cart-component">
+      <div className="cart">
         {cartItems.length > 0 ? (
           cartItems.map((cartItem) => {
-            console.log('cartItem in map', cartItem);
             return (
-              <div key={cartItem.id} style={{ border: '1px solid' }}>
+              <Card className='card' key={cartItem.id}>
                 <Link to={`/products/${cartItem.productId}`}>
-                  <h2>{cartItem.product.title}</h2>
+                  <Card.Title className='title'><h2>{cartItem.product.title}</h2></Card.Title>
                 </Link>
-                <div className="quantity">
-                  <small>{cartItem.quantity}</small>
-                  {/* find the total price for each item based on how many you're buying */}
-                  <button
+                <Card.Body className="quantity">
+                  Quantity: {cartItem.quantity}
+                  <Button
                     value={cartItem.product}
                     onClick={() => this.props.addToCart(cartItem.product)}
                   >
                     +
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     value={cartItem.product}
                     onClick={() => this.props.removeFromCart(cartItem.product)}
                   >
                     -
-                  </button>
-                </div>
-                <p>{cartItem.product.price * cartItem.quantity}</p>
-              </div>
+                  </Button>
+                </Card.Body>
+                <h3>${(cartItem.product.price * cartItem.quantity).toFixed(2)}</h3>
+              </Card>
             );
           })
         ) : (
           <div>No items yet! Click on "Products" to start shopping!</div>
         )}
-        <h1>TOTAL:</h1>
-        <p>{totalPrice}</p>
+        <Card>
+        <h1>TOTAL: ${totalPrice.toFixed(2)}</h1>
+        </Card>
         <Link to={'/checkout'}>
-          <button type="submit">Checkout</button>
+          <Button type="submit">Checkout</Button>
         </Link>
       </div>
     );

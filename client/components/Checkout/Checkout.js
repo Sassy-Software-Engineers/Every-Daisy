@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './CheckoutForm';
 import { fetchSecret } from '../../store/checkout/checkout';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+// const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 
  export class Checkout extends React.Component {
@@ -18,7 +18,7 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
   }
     componentDidMount() {
      this.props.fetchCart();
-    this.props.setSecret()
+    //  this.props.setSecret()
   //   fetch("/api/checkout/create-payment-intent", {
   //     method: "POST",
   //     headers: { "Content-Type": "application/json" },
@@ -38,37 +38,39 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
         )
       : null;
 
-      const appearance = {
-        theme: 'stripe',
-      };
-      const options = {
-        clientSecret: this.props.secret,
-        appearance,
-      };
+      // const appearance = {
+      //   theme: 'stripe',
+      // };
+      // const options = {
+      //   clientSecret: this.props.secret,
+      //   appearance,
+      // };
     return (
       <div>
-        <div className="checkout-form"></div>
-        <div className="cartItems-list">
-          {cartItems.length > 0 ? (
-            cartItems.map((cartItem) => {
-              return (
-                <div key={cartItem.id}>
-                  <p>{cartItem.product.title}</p>
-                  <p>{cartItem.quantity}</p>
-                  <p>{cartItem.product.price}</p>
-                </div>
-    );
-            })
-          ) : (
-            <div>Loading!</div>
-          )}
-          <p>TOTAL: {totalPrice}</p>
-        </div>
-        
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm/>
-        </Elements> 
+        <button onClick={()=>this.props.setSecret()}>click</button>
       </div>
+    //   <div>
+    //     <div className="checkout-form"></div>
+    //     <div className="cartItems-list">
+    //       {cartItems.length > 0 ? (
+    //         cartItems.map((cartItem) => {
+    //           return (
+    //             <div key={cartItem.id}>
+    //               <p>{cartItem.product.title}</p>
+    //               <p>{cartItem.quantity}</p>
+    //               <p>{cartItem.product.price}</p>
+    //             </div>
+    // );
+    //         })
+    //       ) : (
+    //         <div>Loading!</div>
+    //       )}
+    //       <p>TOTAL: {totalPrice}</p>
+    //     </div>
+    //     <Elements options={options} stripe={stripePromise}>
+    //       <CheckoutForm/>
+    //     </Elements> 
+    //   </div>
     );
   }
 }
