@@ -70,13 +70,11 @@ export class AllProducts extends React.Component {
               if (currentFilter === 'all' || product.categories.includes(currentFilter)) return product;
             })
             .map((product) => {
-              // might need to change product.reviews to whatever the path is to get each review
               let averageRating = Math.floor(
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
                 }, 0) / product.reviews.length
               ) || 0;
-              console.log("productReviews:", product, averageRating)
 
               return (
                 <div className="products-container" key={product.id}>
