@@ -67,11 +67,7 @@ export class AllProducts extends React.Component {
           // EVERY product should have a category
           products
             .filter((product) => {
-              if (currentFilter !== 'all') {
-                return product.categories.includes(currentFilter);
-              } else {
-                return product;
-              }
+              if (currentFilter === 'all' || product.categories.includes(currentFilter)) return product;
             })
             .map((product) => {
               // might need to change product.reviews to whatever the path is to get each review
@@ -79,7 +75,8 @@ export class AllProducts extends React.Component {
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
                 }, 0) / product.reviews.length
-              );
+              ) || 0;
+              console.log("productReviews:", product, averageRating)
 
               return (
                 <div className="products-container" key={product.id}>
@@ -98,9 +95,8 @@ export class AllProducts extends React.Component {
                         ADD TO CART
                       </Button>
                     </Card.Body>
-
                     <div className="star-rating">
-                      {[...Array({ averageRating })].map((star, index) => {
+                      {[...Array(averageRating)].map((star, index) => {
                         index += 1;
                         return (
                           <span className="star" key={index}>

@@ -42,6 +42,7 @@ export class AddReview extends React.Component {
           </Form.Label>
           <Form.Control
             type="text"
+            name="title"
             value={title}
             onChange={handleChange}
             required
