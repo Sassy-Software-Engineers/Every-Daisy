@@ -69,7 +69,7 @@ export const removeReview = (productId, review) => {
   return async (dispatch) => {
     try {
     const token = window.localStorage.getItem(TOKEN);
-    const { data } = await axios.delete(`/api/products/${productId}`, review, {
+    const { data } = await axios.delete(`/api/products/${productId}/reviews/${review.id}`, review, {
       headers: {
         authorization: token,
       }
@@ -93,7 +93,7 @@ export default function (state = {}, action) {
     case ADD_REVIEW: 
       return {...state, reviews: [...state.reviews, action.review]}
     case DELETE_REVIEW: 
-      return {...state, reviews: [...state.reviews.filter((review) => review.id !== action.review.id)]}
+      return state.reviews.filter((review) => review.id !== action.review.id)
     default:
       return state;
   }

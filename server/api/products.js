@@ -67,7 +67,7 @@ router.post('/:productId', requireToken, async (req, res, next) => {
   }
 });
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId/reviews/:reviewId', async (req, res, next) => {
     try {
       const review = await Review.findByPk(req.params.reviewId);
       await review.destroy();
