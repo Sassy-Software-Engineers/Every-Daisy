@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addNewReview } from '../../store/products/singleProduct';
-
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 export class AddReview extends React.Component {
   constructor() {
@@ -9,6 +9,7 @@ export class AddReview extends React.Component {
     this.state = {
       title: '',
       content: '',
+      starRating: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,48 +27,52 @@ export class AddReview extends React.Component {
     this.setState({
       title: '',
       content: '',
+      starRating: '',
     });
   }
-
 
   render() {
     const { title, content } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
-      <div>
-        <form id="ProductReview-form" onSubmit={handleSubmit}>
-          <label htmlFor="title">Title:</label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="title">
+          <Form.Label column lg={2}>
+            Title:
+          </Form.Label>
+          <Form.Control
             type="text"
-            name="title"
             value={title}
             onChange={handleChange}
             required
           />
-
-          <label htmlFor="content">Review:</label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="content">
+          <Form.Label column lg={2}>
+            Review:
+          </Form.Label>
+          <Form.Control
             type="text"
-            name="content"
             value={content}
             onChange={handleChange}
+            required
           />
+        </Form.Group>
 
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+        <Button type="submit">Submit</Button>
+      </Form>
     );
   }
 }
 const mapState = (state) => {
   return {
-    product: state.singleProduct
-  }
-}
+    product: state.singleProduct,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReview: (productId,review) => dispatch(addNewReview(productId, review)),
+    addReview: (productId, review) => dispatch(addNewReview(productId, review)),
   };
 };
 

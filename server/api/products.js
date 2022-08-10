@@ -28,7 +28,7 @@ router.get('/:productId', async (req, res, next) => {
     next(e);
   }
 });
-
+//admin edit product
 router.put('/:productId', requireToken, isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.productId);
@@ -48,7 +48,7 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
     next(e);
   }
 });
-
+//review
 router.post('/:productId', requireToken, async (req, res, next) => {
   try {
     const { title, content, starRating } = req.body;
@@ -66,14 +66,3 @@ router.post('/:productId', requireToken, async (req, res, next) => {
     next(error);
   }
 });
-
-router.delete('/:productId/reviews/:reviewId', async (req, res, next) => {
-    try {
-      const review = await Review.findByPk(req.params.reviewId);
-      await review.destroy();
-      res.json(review);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
