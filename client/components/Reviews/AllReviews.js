@@ -5,6 +5,7 @@ export class AllReviews extends React.Component {
 
     render() {
         const reviews = this.props.product.reviews
+        console.log(reviews)
         return (
           <div>
             <h1>All Reviews:</h1>
@@ -12,7 +13,7 @@ export class AllReviews extends React.Component {
                 <ul>
                     {reviews.map((review) => {
                         return (
-                            <div>
+                            <div key = {review.id}>
                                 <h2>{review.title}</h2>
                                 <p>{review.content}</p>
                             </div>
