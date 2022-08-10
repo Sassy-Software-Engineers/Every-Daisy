@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-dom';
+import { connect } from 'react-redux';
 import { fetchCart, setOrder } from '../../store/cart/cart';
 
 export class Checkout extends React.Component {
@@ -26,16 +26,19 @@ export class Checkout extends React.Component {
               return (
                 <div key={cartItem.id}>
                   <p>{cartItem.product.title}</p>
-                  <p>{cartItem.product.quantity}</p>
+                  <p>{cartItem.quantity}</p>
                   <p>{cartItem.product.price}</p>
                 </div>
-              );
+    );
             })
           ) : (
             <div>Loading!</div>
           )}
           <p>TOTAL: {totalPrice}</p>
         </div>
+        <form action="/create-checkout-session" method="POST">
+          <button type="submit">Checkout</button>
+        </form>
       </div>
     );
   }
@@ -53,3 +56,5 @@ const mapDispatch = (dispatch) => {
     setOrder: () => dispatch(setOrder()),
   };
 };
+
+export default connect(mapState, mapDispatch)(Checkout);
