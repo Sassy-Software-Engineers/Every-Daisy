@@ -51,23 +51,32 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
 
 router.post('/:productId', requireToken, async (req, res, next) => {
   try {
-      const { title, content, starRating } = req.body;
-      const user = req.user.id
-      const newReview = await Review.create({ 
-          title, starRating, content
-      })
-      res.json(newReview)
+    const { title, content, starRating } = req.body;
+    const user = req.user.id;
+    const product = req.params.productId;
+    const newReview = await Review.create({
+      title,
+      starRating,
+      content,
+    });
+    newReview.setProduct(product);
+    newReview.setUser(user);
+    res.json(newReview);
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:productId/reviews/:reviewsId', requireToken, async (req, res, next) => {
-  try {
-    const review = await Review.findByPk(req.params.reviewsId)
-    await Review.destory();
-    res.json(review)
-  } catch (error) {
-    next(error);
+router.delete(
+  '/:productId/reviews/:reviewsId',
+  requireToken,
+  async (req, res, next) => {
+    try {
+      const review = await Review.findByPk(req.params.reviewsId);
+      await Review.destroy();
+      res.json(review);
+    } catch (error) {
+      next(error);
+    }
   }
-})
+);
