@@ -8,6 +8,7 @@ import AllProducts from './Product/AllProducts';
 // import EditProduct from './components/EditProduct';
 import SingleProduct from './Product/SingleProduct';
 import Cart from './Cart';
+import BPIndex from './Backpanel/BPIndex';
 import Cookie from './Auth/Cookie';
 
 /**
