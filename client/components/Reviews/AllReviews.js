@@ -1,7 +1,8 @@
 import React from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { removeReview } from '../../store/products/singleProduct';
-
+import './Reviews.css';
 export class AllReviews extends React.Component {
   constructor() {
     super();
@@ -16,24 +17,28 @@ export class AllReviews extends React.Component {
   render() {
     const reviews = this.props.product.reviews;
     return (
-      <div>
-        <h1>All Reviews:</h1>
+      <ListGroup>
+        <ListGroupItem as="h4" className="review-title">
+          Reviews:
+        </ListGroupItem>
         {reviews && reviews.length ? (
-          <ul>
+          <ListGroupItem className="review-body">
             {reviews.map((review) => {
               return (
-                <div key={review.id}>
-                  <h2>{review.title}</h2>
-                  <p>{review.content}</p>
-                  <Rating value={review.starRating} edit={false} />
-                </div>
+                <ListGroupItem key={review.id}>
+                  <ListGroupItem as="h6">{review.title}</ListGroupItem>
+                  <ListGroupItem>{review.content}</ListGroupItem>
+                  {/* <Rating value={review.starRating} edit={false} /> */}
+                </ListGroupItem>
               );
             })}
-          </ul>
+          </ListGroupItem>
         ) : (
-          <h5>No reviews yet, leaf a review!</h5>
+          <ListGroupItem as="h5" className=".review-title">
+            No reviews yet, leaf a review!
+          </ListGroupItem>
         )}
-      </div>
+      </ListGroup>
     );
   }
 }

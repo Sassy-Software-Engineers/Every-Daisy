@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNewReview } from '../../store/products/singleProduct';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-
+import Rating from './StarRatings';
 export class AddReview extends React.Component {
   constructor() {
     super();
@@ -58,7 +58,7 @@ export class AddReview extends React.Component {
             required
           />
         </Form.Group>
-
+        {/* <Rating edit={true} /> */}
         <Button type="submit">Submit</Button>
       </Form>
     );

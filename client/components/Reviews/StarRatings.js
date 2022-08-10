@@ -25,8 +25,5 @@ export class Rating extends React.Component {
     );
   }
 }
-mapState = ({ singleProduct }) => ({
-  reviews: state.singleProduct.reviews,
-});
 
 export default Rating;
