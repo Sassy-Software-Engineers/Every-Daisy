@@ -1,7 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { removeReview } from '../../store/products/singleProduct';
 
 export class AllReviews extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(event) {
+    event.preventDefault();
+    this.props.deleteReview(event.target.value);
+  }
 
     render() {
         const reviews = this.props.product.reviews
@@ -15,6 +24,7 @@ export class AllReviews extends React.Component {
                             <div key = {review.id}>
                                 <h2>{review.title}</h2>
                                 <p>{review.content}</p>
+                                <button onClick={this.handleClick} value={review.id}>X</button>
                             </div>
                         );
                     })}
@@ -34,5 +44,11 @@ const mapState = (state) => {
     }
   }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteReview: (productId, review) => dispatch(removeReview(productId, review))
+    
+  };
+};
 
-  export default connect(mapState)(AllReviews);
+export default connect(mapState, mapDispatchToProps)(AllReviews);

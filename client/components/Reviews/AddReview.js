@@ -29,6 +29,7 @@ export class AddReview extends React.Component {
     });
   }
 
+
   render() {
     const { title, content } = this.state;
     const { handleSubmit, handleChange } = this;
