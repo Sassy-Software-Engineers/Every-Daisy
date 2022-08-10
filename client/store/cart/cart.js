@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { COOKIE } from '../../components/User/Cookie';
+import { COOKIE } from '../../components/Auth/Cookie';
 
 const TOKEN = 'token';
 

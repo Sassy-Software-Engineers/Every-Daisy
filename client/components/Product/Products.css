@@ -1,0 +1,40 @@
+ Button {
+    background-color:#aea57cff !important;
+    border: 1px #aea57cff !important;
+}
+ Button:hover {
+    background-color:#796926 !important;
+    border: 1px #796926 !important;
+}
+.products-container {
+    margin:auto;
+    text-align: center;
+    padding:5px
+}
+.products-container .card-title{
+    text-decoration:none !important;
+    color:#6b8f71ff;
+    padding:5px
+}
+.products-container .card-title:hover{
+    font-size: 130%;
+    color:#6b8f71ff;
+    transition: 100ms;
+}
+.products-container .card{
+
+    border: 3px solid #6b8f71ff;
+}
+.products-component h1 {
+    color:rgb(180, 123, 69)
+}
+.single-product-container {
+    margin:auto;
+    text-align: center;
+}
+.single-product-container .img {
+    display: flex;
+    margin:auto;
+   width:18rem !important;
+   height:18rem !important
+}

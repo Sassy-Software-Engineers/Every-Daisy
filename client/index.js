@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Container } from 'react-bootstrap';
 
-
 ReactDOM.render(
   <Container>
     <Provider store={store}>
