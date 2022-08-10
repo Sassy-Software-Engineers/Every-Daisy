@@ -1,12 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, setOrder } from '../../store/cart/cart';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from './CheckoutForm';
+import { fetchSecret } from '../../store/checkout/checkout';
 
-export class Checkout extends React.Component {
-  componentDidMount() {
-    this.props.fetchCart();
+const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+
+ export class Checkout extends React.Component {
+  constructor(){
+    super()
+    this.state= {
+      clientSecret:''
+    }
   }
-
+    componentDidMount() {
+     this.props.fetchCart();
+    this.props.setSecret()
+  //   fetch("/api/checkout/create-payment-intent", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ items: cartItems }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {this.setState({clientSecret:data.clientSecret})})
+  }
+  
   render() {
     let cart = this.props.cart;
     let cartItems = cart.cartItems || [];
@@ -17,6 +38,13 @@ export class Checkout extends React.Component {
         )
       : null;
 
+      const appearance = {
+        theme: 'stripe',
+      };
+      const options = {
+        clientSecret: this.props.secret,
+        appearance,
+      };
     return (
       <div>
         <div className="checkout-form"></div>
@@ -36,9 +64,10 @@ export class Checkout extends React.Component {
           )}
           <p>TOTAL: {totalPrice}</p>
         </div>
-        <form action="/create-checkout-session" method="POST">
-          <button type="submit">Checkout</button>
-        </form>
+        
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm/>
+        </Elements> 
       </div>
     );
   }
@@ -47,6 +76,7 @@ export class Checkout extends React.Component {
 const mapState = (state) => {
   return {
     cart: state.cart,
+    secret: state.checkout
   };
 };
 
@@ -54,6 +84,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchCart: () => dispatch(fetchCart()),
     setOrder: () => dispatch(setOrder()),
+    setSecret: () => dispatch(fetchSecret())
   };
 };
 

@@ -35,6 +35,7 @@ router.post('/removeCartItem', findRelevantUser, async (req, res, next) => {
 router.post('/createOrder', findRelevantUser, async (req, res, next) => {
   try {
     let newOrder = await req.user.createOrder();
+    res.send(newOrder)
   } catch (e) {
     next(e);
   }
