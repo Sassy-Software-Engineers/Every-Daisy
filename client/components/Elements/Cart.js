@@ -70,6 +70,9 @@ export class Cart extends React.Component {
         )}
         <h1>TOTAL:</h1>
         <p>{totalPrice}</p>
+        <form action="/create-checkout-session" method="POST">
+          <button type="submit">Checkout</button>
+        </form>
       </div>
     );
   }
