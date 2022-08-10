@@ -28,6 +28,7 @@ export class AllReviews extends React.Component {
                 <ListGroupItem key={review.id}>
                   <ListGroupItem as="h6">{review.title}</ListGroupItem>
                   <ListGroupItem>{review.content}</ListGroupItem>
+                  <p> Rating: </p>
                       {[...Array(review.starRating)].map((star, index) => {
                         index += 1;
                         return (
