@@ -1,45 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import allProducts from '../../store/products/allProducts';
-import AddReview from './AddReview';
 
 export class AllReviews extends React.Component {
-  componentDidMount() {
-    this.props.getReviews();
-  }
 
-  render() {
-    const reviews = this.props.reviews;
-    return (
-      <div>
-        <AddReview> Add Review: </AddReview>
-        <ul>
-          {reviews.map((review) => {
-            return (
-              <li>
-                <p>{review.title} </p>
-                <p>{review.starRating} </p>
-                <p>{review.content}</p>
-              </li>
-            );
-          })}
-          <p>Leaf a review for our plant!</p>
-        </ul>
-      </div>
-    );
-  }
+    render() {
+        const reviews = this.props.product.reviews
+        return (
+          <div>
+            <h1>All Reviews:</h1>
+            {reviews && reviews.length ? (
+                <ul>
+                    {reviews.map((review) => {
+                        return (
+                            <div>
+                                <h2>{review.title}</h2>
+                                <p>{review.content}</p>
+                            </div>
+                        );
+                    })}
+                </ul>
+            ) : (
+                <h5>No reviews yet, leaf a review!</h5>
+            )
+            }
+          </div>
+        )
+    }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    reviews: state.allReviews,
-  };
-};
+const mapState = (state) => {
+    return {
+        product: state.singleProduct
+    }
+  }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getReviews: () => dispatch(fetchReviews()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+  export default connect(mapState)(AllReviews);
