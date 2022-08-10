@@ -10,7 +10,9 @@ import SingleProduct from './Product/SingleProduct';
 import Cart from './Cart';
 import Cookie from './Auth/Cookie';
 import Checkout from './Checkout/Checkout';
-import CheckoutForm from './Checkout/CheckoutForm'
+import CheckoutStripe from './Checkout/CheckoutStripe';
+import CheckoutForm from './Checkout/CheckoutForm';
+import Confirmation from './Checkout/Confirmation';
 
 /**
  * COMPONENT
@@ -30,8 +32,9 @@ class Routes extends Component {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/checkout/form" component={CheckoutForm} />
+          <Route exact path="/checkout" component={CheckoutStripe} />
+          {/* <Route exact path="/checkout/form" component={CheckoutForm} /> */}
+          <Route exact path="/confirmation" component={Confirmation} />
           <Route path="/home">
             <Redirect to="/" />
           </Route>

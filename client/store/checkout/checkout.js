@@ -23,12 +23,16 @@ export const fetchSecret = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     const cookie = window.localStorage.getItem(COOKIE);
-    const { data } = await axios.post('/api/checkout/create-payment-intent', {
-      headers: {
-        authorization: token,
-        device: cookie,
-      },
-    });
+    const { data } = await axios.post(
+      '/api/checkout/create-payment-intent',
+      null,
+      {
+        headers: {
+          authorization: token,
+          device: cookie,
+        },
+      }
+    );
     dispatch(setSecret(data));
   };
 };

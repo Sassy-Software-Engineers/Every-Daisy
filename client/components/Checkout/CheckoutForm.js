@@ -4,13 +4,17 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { connect } from 'react-redux';
+import { setOrder } from '../../store/cart/cart';
 
-export default function CheckoutForm() {
+function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [order, changeOrderStatus] = useState(props.cart);
+  console.log('PROPS', props);
 
   useEffect(() => {
     if (!stripe) {
@@ -58,7 +62,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:3000',
+        return_url: 'http://localhost:8080/confirmation',
       },
     });
 
@@ -79,7 +83,11 @@ export default function CheckoutForm() {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button
+        disabled={isLoading || !stripe || !elements}
+        onClick={() => props.setOrder()}
+        id="submit"
+      >
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
         </span>
@@ -89,3 +97,17 @@ export default function CheckoutForm() {
     </form>
   );
 }
+
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    setOrder: () => dispatch(setOrder()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(CheckoutForm);

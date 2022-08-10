@@ -7,6 +7,7 @@ const { findRelevantUser } = require('./middlewares');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const calculateOrderAmount = (cartItems) => {
+  console.log('CART ITEMS FROM APi route', cartItems);
   let dollarTotal = cartItems.reduce(
     (accum, cur) => accum + +cur.product.price * cur.quantity,
     0
@@ -16,10 +17,10 @@ const calculateOrderAmount = (cartItems) => {
 
 router.post('/create-payment-intent', findRelevantUser, async (req, res) => {
   const user = req.user;
-  console.log(user)
-  const cartItems = await user.getCartItems();
+  console.log(user);
+  const data = await user.getCartItems();
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(cartItems),
+    amount: calculateOrderAmount(data.dataValues.cartItems),
     currency: 'usd',
     automatic_payment_methods: {
       enabled: true,

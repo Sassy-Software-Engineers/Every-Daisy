@@ -74,7 +74,7 @@ export const setOrder = () => async (dispatch) => {
   try {
     const token = window.localStorage.getItem(TOKEN);
     const cookie = window.localStorage.getItem(COOKIE);
-    const { data } = await axios.post('/api/cart/createOrder', {
+    const { data } = await axios.post('/api/cart/createOrder', null, {
       headers: {
         authorization: token,
         device: cookie,
