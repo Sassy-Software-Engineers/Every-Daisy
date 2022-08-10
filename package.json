@@ -33,7 +33,8 @@
     "pg": "^8.5.1",
     "react-bootstrap": "^2.5.0",
     "react-stripe-checkout": "^2.6.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "stripe": "^10.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
