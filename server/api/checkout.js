@@ -15,10 +15,16 @@ const calculateOrderAmount = (cartItems) => {
   return dollarTotal * 100;
 };
 
-router.post('/create-payment-intent', findRelevantUser, async (req, res) => {
+router.post('/create-payment-intent', findRelevantUser, async (req, res, next) => {
+  try {
   const user = req.user;
-  console.log(user);
+ 
   const data = await user.getCartItems();
+  console.log(data)
+  if(!data.cartItems.length){
+    res.sendStatus(204)
+    return
+  }
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(data.dataValues.cartItems),
     currency: 'usd',
@@ -26,5 +32,8 @@ router.post('/create-payment-intent', findRelevantUser, async (req, res) => {
       enabled: true,
     },
   });
-  res.send(paymentIntent.client_secret);
+  res.send(paymentIntent.client_secret);}
+  catch(err) {
+   next(err)
+  }
 });

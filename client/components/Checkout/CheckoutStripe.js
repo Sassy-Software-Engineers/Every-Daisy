@@ -18,13 +18,6 @@ export class Checkout extends React.Component {
   componentDidMount() {
     this.props.fetchCart();
     this.props.setSecret();
-    //   fetch("/api/checkout/create-payment-intent", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ items: cartItems }),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {this.setState({clientSecret:data.clientSecret})})
   }
 
   render() {
@@ -36,7 +29,8 @@ export class Checkout extends React.Component {
           0
         )
       : null;
-
+      
+      
     const appearance = {
       theme: 'stripe',
     };
@@ -65,9 +59,11 @@ export class Checkout extends React.Component {
             )}
             <p>TOTAL: {totalPrice.toFixed(2)}</p>
           </div>
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
+          {this.props.secret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
         </div>
       </div>
     );
