@@ -79,15 +79,14 @@ export class SearchBar extends React.Component {
             {filteredProducts.map((product) => {
                 return (
                   <ListGroup key={product.id}>
-                    <ListGroupItem key={product.id} value={product.title}>
+                    <ListGroupItem key={product.id} value={product.title} as={NavLink} to={`/products/${product.id}`}>
                       {product.title}
                     </ListGroupItem>
                   </ListGroup>
-
                 );
             })}
           </ul>
-          <Button variant="outline-secondary" id="button-addon2">
+          <Button variant="outline-secondary" id="button-addon2" onClick={handleClick}>
             Search
           </Button>
     </InputGroup>
