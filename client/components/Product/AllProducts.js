@@ -64,16 +64,13 @@ export class AllProducts extends React.Component {
 
 
         {
-          // might need to change to fit whatever the path to the product's categories is
-          // EVERY product should have a category
-          
           products
             .filter((product) => {
-              console.log("product:", product, "currentFilter:", currentFilter)
-              if (currentFilter === 'all'|| product.categories.includes(currentFilter)) return product;
+              const categoryArray = [];
+              product.categories.forEach((category) => categoryArray.push(category.name))
+              if (currentFilter === 'all'|| categoryArray.includes(currentFilter)) return product;
             })
             .map((product) => {
-              // console.log("product:", product)
               let averageRating = Math.floor(
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
