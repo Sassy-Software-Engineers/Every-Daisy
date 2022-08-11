@@ -1,7 +1,6 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { removeReview } from '../../store/products/singleProduct';
 import './Reviews.css';
 export class AllReviews extends React.Component {
   constructor() {
