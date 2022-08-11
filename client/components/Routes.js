@@ -10,6 +10,10 @@ import SingleProduct from './Product/SingleProduct';
 import Cart from './Cart';
 import BPIndex from './Backpanel/BPIndex';
 import Cookie from './Auth/Cookie';
+import Checkout from './Checkout/CheckoutOld';
+import CheckoutStripe from './Checkout/CheckoutStripe';
+import CheckoutForm from './Checkout/CheckoutForm';
+import Confirmation from './Checkout/Confirmation';
 
 /**
  * COMPONENT
@@ -30,6 +34,11 @@ class Routes extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/backpanel" component={BPIndex} />
+
+          <Route exact path="/checkout" component={CheckoutStripe} />
+          {/* <Route exact path="/checkout/form" component={CheckoutForm} /> */}
+          <Route exact path="/confirmation" component={Confirmation} />
+
           <Route path="/home">
             <Redirect to="/" />
           </Route>

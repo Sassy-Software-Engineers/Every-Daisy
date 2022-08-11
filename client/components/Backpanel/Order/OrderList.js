@@ -7,45 +7,42 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-export class OrderList extends React.Component {
-    componentDidMount() {
-        this.props.fetchOrders();
-    }
+class OrderList extends React.Component {
+  componentDidMount() {
+    this.props.fetchOrders();
+  }
 
-    render() {
-        const orders = this.props.orders || [];
-        return (
-            <div className='order-list-block'>
-                <div className='list-controls'>
-                    <div className='status-selector'>
-                    </div>
-                    <div className='user-selector'>
-                    </div>
-                </div>
-                <div className='order-list'>
-                { orders.map(order => {
-                    return (<ListedOrder 
-                              key={`${order.status + order.id}`} 
-                              order={order}
-                            />)})
-                }
-                </div>
-            </div>
-        );
-    }
+  render() {
+    const orders = this.props.orders || [];
+    return (
+      <div className="order-list-block">
+        <div className="list-controls">
+          <div className="status-selector"></div>
+          <div className="user-selector"></div>
+        </div>
+        <div className="order-list">
+          {orders.map((order) => {
+            return (
+              <ListedOrder key={`${order.status + order.id}`} order={order} />
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapState = (state) => {
-    return {
-        orders: state.orders,
-    };
+  return {
+    orders: state.allOrders,
+  };
 };
 
 const mapDispatch = (dispatch, { history }) => {
-    return {
-        fetchOrders: () => dispatch(fetchOrders()),
-        deleteOrder: (id) => dispatch(deleteOrder(id, history))
-    };
+  return {
+    fetchOrders: () => dispatch(fetchOrders()),
+    deleteOrder: (id) => dispatch(deleteOrder(id, history)),
+  };
 };
 
 export default connect(mapState, mapDispatch)(OrderList);

@@ -28,7 +28,7 @@ export class SearchBar extends React.Component {
     );
     return (
       <div className="search-bar-container">
-        <h1>Every Daisy of the Week</h1>
+        <h1>Every Daisy of the Week <img src='https://i.pinimg.com/originals/1f/57/6e/1f576ef8600d437f6f8c73c81ddbcbf0.png'/></h1>
         <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand><Nav.Link as={NavLink} to="/">Home</Nav.Link></Navbar.Brand>
