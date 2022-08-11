@@ -9,7 +9,6 @@ import singleUser from './user/singleUser';
 import allUsers from './user/allUsers';
 import cart from './cart/cart';
 import allCategories from './categories/allCategories';
-import allReviews from './reviews/reviews'
 import checkout from './checkout/checkout'
 
 const reducer = combineReducers({
@@ -20,7 +19,6 @@ const reducer = combineReducers({
   allUsers,
   cart,
   allCategories,
-  allReviews,
   checkout
 });
 const middleware = composeWithDevTools(
