@@ -94,9 +94,11 @@ export class SearchBar extends React.Component {
             )}
           </div>
       </ListGroup>
+      <div>
           <Button variant="outline-secondary" onClick={handleClick}className="search-btn">
             Search
           </Button>
+      </div>
     </InputGroup>
 
         <div className="cart-icon">
