@@ -32,7 +32,7 @@ export class AddReview extends React.Component {
   }
 
   render() {
-    const { title, content } = this.state;
+    const { title, content, starRating } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
       <Form onSubmit={handleSubmit}>
@@ -54,12 +54,25 @@ export class AddReview extends React.Component {
           </Form.Label>
           <Form.Control
             type="text"
+            name="content"
             value={content}
             onChange={handleChange}
             required
           />
         </Form.Group>
-        {/* <Rating edit={true} /> */}
+        <Form.Group className="mb-3" controlId="content">
+          <Form.Label column lg={2}>
+            Rating: 
+          </Form.Label>
+          <Form.Control
+            placeholder="/5"
+            type="text"
+            name="starRating"
+            value={starRating}
+            onChange={handleChange}
+            required
+          /> 
+        </Form.Group>
         <Button type="submit">Submit</Button>
       </Form>
     );

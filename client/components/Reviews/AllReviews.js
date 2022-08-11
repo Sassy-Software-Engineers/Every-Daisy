@@ -3,15 +3,6 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import './Reviews.css';
 export class AllReviews extends React.Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick(event) {
-    event.preventDefault();
-
-    this.props.deleteReview(event.target.value);
-  }
 
   render() {
     const reviews = this.props.product.reviews;
@@ -27,7 +18,6 @@ export class AllReviews extends React.Component {
                 <ListGroupItem key={review.id}>
                   <ListGroupItem as="h6">{review.title}</ListGroupItem>
                   <ListGroupItem>{review.content}</ListGroupItem>
-                  <p> Rating: </p>
                       {[...Array(review.starRating)].map((star, index) => {
                         index += 1;
                         return (
@@ -56,11 +46,5 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteReview: (productId, review) =>
-      dispatch(removeReview(productId, review)),
-  };
-};
 
-export default connect(mapState, mapDispatchToProps)(AllReviews);
+export default connect(mapState)(AllReviews);
