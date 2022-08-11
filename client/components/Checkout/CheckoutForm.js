@@ -62,7 +62,7 @@ function CheckoutForm(props) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: process.env.CONFIRMATIONPAGE,
+        return_url: 'http://localhost:8080/confirmation',
       },
     });
 
