@@ -1,45 +1,50 @@
 import React from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import allProducts from '../../store/products/allProducts';
-import AddReview from './AddReview';
-
+import './Reviews.css';
 export class AllReviews extends React.Component {
-  componentDidMount() {
-    this.props.getReviews();
-  }
 
   render() {
-    const reviews = this.props.reviews;
+    const reviews = this.props.product.reviews;
     return (
-      <div>
-        <AddReview> Add Review: </AddReview>
-        <ul>
-          {reviews.map((review) => {
-            return (
-              <li>
-                <p>{review.title} </p>
-                <p>{review.starRating} </p>
-                <p>{review.content}</p>
-              </li>
-            );
-          })}
-          <p>Leaf a review for our plant!</p>
-        </ul>
-      </div>
+      <ListGroup>
+        <ListGroupItem as="h4" className="review-title">
+          Reviews:
+        </ListGroupItem>
+        {reviews && reviews.length ? (
+          <ListGroupItem className="review-body">
+            {reviews.map((review) => {
+              return (
+                <ListGroupItem key={review.id}>
+                  <ListGroupItem as="h6">{review.title}</ListGroupItem>
+                  <ListGroupItem>{review.content}</ListGroupItem>
+                      {[...Array(review.starRating)].map((star, index) => {
+                        index += 1;
+                        return (
+                          <span className="star" key={index}>
+                            &#9733;
+                          </span>
+                        );
+                      })}
+                </ListGroupItem>
+              );
+            })}
+          </ListGroupItem>
+        ) : (
+          <ListGroupItem as="h5" className=".review-title">
+            No reviews yet, leaf a review!
+          </ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapState = (state) => {
   return {
-    reviews: state.allReviews,
+    product: state.singleProduct,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getReviews: () => dispatch(fetchReviews()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default connect(mapState)(AllReviews);

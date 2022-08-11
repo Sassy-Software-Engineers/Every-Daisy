@@ -15,5 +15,10 @@
 
 .search-bar-container img {
     height:40px;
-    width:40px
+    width:100px
+}
+
+.search-bar-container.search-btn {
+    max-height:40px!important;
+    width:40px!important
 }

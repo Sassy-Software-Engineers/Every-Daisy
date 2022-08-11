@@ -22,7 +22,7 @@ export class AllProducts extends React.Component {
 
   handleChange(e) {
     this.setState({
-      value: e.target.value,
+      filter: e
     });
   }
   handleClick(e) {
@@ -45,15 +45,15 @@ export class AllProducts extends React.Component {
         </h1>
 
         <div className="category-filter">
-          <Dropdown onChange={this.handleChange}>
+          <Dropdown onSelect={this.handleChange}>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Filter
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item value="all">Show All</Dropdown.Item>
+              <Dropdown.Item eventKey="all">Show All</Dropdown.Item>
               {categories.map((category) => {
                 return (
-                  <Dropdown.Item key={category.id} value={category.name}>
+                  <Dropdown.Item key={category.id} eventKey={category.name}>
                     {category.name}
                   </Dropdown.Item>
                 );
@@ -62,24 +62,20 @@ export class AllProducts extends React.Component {
           </Dropdown>
         </div>
 
+
         {
-          // might need to change to fit whatever the path to the product's categories is
-          // EVERY product should have a category
           products
             .filter((product) => {
-              if (currentFilter !== 'all') {
-                return product.categories.includes(currentFilter);
-              } else {
-                return product;
-              }
+              const categoryArray = [];
+              product.categories.forEach((category) => categoryArray.push(category.name))
+              if (currentFilter === 'all'|| categoryArray.includes(currentFilter)) return product;
             })
             .map((product) => {
-              // might need to change product.reviews to whatever the path is to get each review
               let averageRating = Math.floor(
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
                 }, 0) / product.reviews.length
-              );
+              ) || 0;
 
               return (
                 <div className="products-container" key={product.id}>
@@ -98,9 +94,8 @@ export class AllProducts extends React.Component {
                         ADD TO CART
                       </Button>
                     </Card.Body>
-
                     <div className="star-rating">
-                      {[...Array({ averageRating })].map((star, index) => {
+                      {[...Array(averageRating)].map((star, index) => {
                         index += 1;
                         return (
                           <span className="star" key={index}>

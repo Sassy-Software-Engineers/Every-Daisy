@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-
+import { addNewReview } from '../../store/products/singleProduct';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 export class AddReview extends React.Component {
   constructor() {
     super();
     this.state = {
       title: '',
       content: '',
+      starRating: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -19,48 +22,71 @@ export class AddReview extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addReview(this.state);
+    this.props.addReview(this.props.product.id, this.state);
     this.setState({
       title: '',
       content: '',
+      starRating: '',
     });
   }
 
   render() {
-    const { title, content } = this.state;
+    const { title, content, starRating } = this.state;
     const { handleSubmit, handleChange } = this;
     return (
-      <div>
-        <form id="ProductReview-form" onSubmit={handleSubmit}>
-          <label>Title:</label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="title">
+          <Form.Label column lg={2}>
+            Title:
+          </Form.Label>
+          <Form.Control
             type="text"
             name="title"
             value={title}
             onChange={handleChange}
             required
           />
-
-          <label>Review:</label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="content">
+          <Form.Label column lg={2}>
+            Review:
+          </Form.Label>
+          <Form.Control
             type="text"
-            name="review"
+            name="content"
             value={content}
             onChange={handleChange}
             required
           />
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="content">
+          <Form.Label column lg={2}>
+            Rating: 
+          </Form.Label>
+          <Form.Control
+            placeholder="/5"
+            type="text"
+            name="starRating"
+            value={starRating}
+            onChange={handleChange}
+            required
+          /> 
+        </Form.Group>
+        <Button type="submit">Submit</Button>
+      </Form>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
+const mapState = (state) => {
   return {
-    addReview: (review) => dispatch(addNewReview(review)),
+    product: state.singleProduct,
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddReview);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addReview: (productId, review) => dispatch(addNewReview(productId, review)),
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(AddReview);

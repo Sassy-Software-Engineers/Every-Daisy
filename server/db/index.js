@@ -35,4 +35,3 @@ module.exports = {
     CartItem,
   },
 };
-//we should be importing the models in any other files dependent on associations from here by requiring const {models: {User, Product, Review, Order, Category, CartItem}} = require..... etc.
