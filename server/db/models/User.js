@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -143,17 +144,16 @@ User.findByToken = async function (token) {
 
 User.findByDevice = async function (device) {
   try {
-    const user = await User.findOne({
-      where: {
-        device,
-        username: null
-      }
-    });
-    if (!user) {
-      return null;
+  const user = await this.findOne({
+    where: {
+      password: null,
+      device
     }
-    return user;
-  } catch (ex) {
+  });
+  if (!user) return null;
+  return user;
+  }
+catch (ex) {
     const error = Error('bad cookie');
     error.status = 401;
     throw error;

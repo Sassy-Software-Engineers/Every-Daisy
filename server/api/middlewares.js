@@ -40,8 +40,6 @@ const findRelevantUser = async (req, res, next) => {
       req.user = user;
     }
     next();
-    // let user = await User.findByDevice(device);
-    // if (!user) user = await User.findByToken(authorization);
   }
   catch (error) { next(error) }
 };
