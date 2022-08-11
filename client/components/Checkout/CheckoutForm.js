@@ -14,7 +14,6 @@ function CheckoutForm(props) {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [order, changeOrderStatus] = useState(props.cart);
-  console.log('PROPS', props);
 
   useEffect(() => {
     if (!stripe) {
@@ -51,18 +50,15 @@ function CheckoutForm(props) {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
     setIsLoading(true);
-
+    let[protocol,_paths,returnUrl]= window.location.href.split('/')
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:8080/confirmation',
+        return_url: `${protocol}//${returnUrl}/confirmation`,
       },
     });
 
