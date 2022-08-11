@@ -88,9 +88,8 @@ export class SearchBar extends React.Component {
               })}
             </ul>
           ) : (
-            ''
+            ""
           )}
-          
           <Button variant="outline-secondary" id="button-addon2" onClick={handleClick}>
             Search
           </Button>
