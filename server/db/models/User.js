@@ -149,6 +149,7 @@ User.findByDevice = async function (device) {
       password: null,
       device
     }
+  });
   if (!user) return null;
   return user;
   }

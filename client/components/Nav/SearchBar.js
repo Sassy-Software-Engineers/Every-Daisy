@@ -42,14 +42,6 @@ export class SearchBar extends React.Component {
               <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
             }
                 {isLoggedIn ? 
-            <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
-              <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-            }
-                {isLoggedIn ? 
-            <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
-              <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-            }
-                {isLoggedIn ? 
               '':
               <Nav.Link as={NavLink} to="/signup">Signup</Nav.Link>
             }
