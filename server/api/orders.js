@@ -18,6 +18,7 @@ router.get('/', requireToken, isAdmin, async (req, res, next) => {
                 include: {
                     model: User,
                     as: 'user',
+                    attributes: ['username']
                 }
             });
         res.json(orders);

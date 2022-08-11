@@ -2,18 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-export const ListedOrder = (props) => {
-    const { order } = props;
+const ListedOrder = (props) => {
+    const order = props.order;
     return (
+        <div>
         <Card className="card">
             <Link className="card-title" to={`/orders/${order.id}`}>
               <Card.Title>{`Order no. ${order.id}`}</Card.Title>
             </Link>
             <Card.Body>
-              
-              <small>${order.total}</small>{' '}
+                      <small>{order.user.username}</small>{' '}
             </Card.Body>
         </Card>
+        </div>
     );
 };
 

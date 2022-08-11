@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { COOKIE } from '../../components/Auth/Cookie';
+
+const TOKEN = 'token';
 
 /**
  * ACTION TYPES
@@ -25,23 +28,44 @@ const deletedOrder = (order) => ({
  * THUNK CREATORS
  */
 export const fetchOrders = () => {
-  return async (dispatch) => {
-    const { data } = await axios.get('/api/orders');
-    dispatch(setOrders(data));
-  };
+    return async (dispatch) => {
+        const token = window.localStorage.getItem(TOKEN);
+        const cookie = window.localStorage.getItem(COOKIE);
+        const { data } = await axios.get('/api/orders', {
+            headers: {
+                authorization: token,
+                device: cookie,
+            }
+        });
+        dispatch(setOrders(data));
+    };
 };
 export const createOrder = (order, history) => {
-  return async (dispatch) => {
-    const { data } = await axios.post('/api/orders', order);
-    dispatch(addOrder(data));
-    history.push('/');
-  };
+    return async (dispatch) => {
+        const token = window.localStorage.getItem(TOKEN);
+        const cookie = window.localStorage.getItem(COOKIE);
+        const { data } = await axios.post('/api/orders', order, {
+            headers: {
+                authorization: token,
+                device: cookie,
+            }
+        });
+        dispatch(addOrder(data));
+        history.push('/');
+    };
 };
 export const deleteOrder = (id) => {
-  return async (dispatch) => {
-    const { data } = await axios.delete(`/api/orders/${id}`);
-    dispatch(deletedOrder(data));
-  };
+    return async (dispatch) => {
+        const token = window.localStorage.getItem(TOKEN);
+        const cookie = window.localStorage.getItem(COOKIE);
+        const { data } = await axios.delete(`/api/orders/${id}`, {
+            headers: {
+                authorization: token,
+                device: cookie,
+            }
+        });
+        dispatch(deletedOrder(data));
+    };
 };
 /**
  * REDUCER

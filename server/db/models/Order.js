@@ -25,7 +25,6 @@ Order.prototype.itemized = async function() {
       include: { model: Product }
     },
   });
-  order.total = await order.getTotal();
   return order;
 };
 
