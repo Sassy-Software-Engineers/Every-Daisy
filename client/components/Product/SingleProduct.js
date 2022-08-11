@@ -44,16 +44,12 @@ class SingleProduct extends React.Component {
   }
 
   componentDidMount() {
-    try {
       this.props.fetchProduct(this.props.match.params.id);
       this.setState({
         title: this.props.product.title,
         price: this.props.product.price,
         quantity: this.props.product.quantity,
       });
-    } catch (err) {
-      console.log('error in fetchingProducts');
-    }
   }
 
   render() {

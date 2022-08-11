@@ -50,14 +50,14 @@ export class Checkout extends React.Component {
                   <div key={cartItem.id}>
                     <p>{cartItem.product.title}</p>
                     <p>{cartItem.quantity}</p>
-                    <p>{cartItem.product.price}</p>
+                    <p>${cartItem.product.price}</p>
                   </div>
                 );
               })
             ) : (
               <div>Loading!</div>
             )}
-            <p>TOTAL: {totalPrice.toFixed(2)}</p>
+            <p>TOTAL:${totalPrice.toFixed(2)}</p>
           </div>
           {this.props.secret && (
             <Elements options={options} stripe={stripePromise}>

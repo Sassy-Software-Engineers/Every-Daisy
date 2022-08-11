@@ -19,7 +19,6 @@ export class Cart extends React.Component {
   render() {
     let cart = this.props.cart; 
     let cartItems = cart.cartItems || [];
-    console.log('cartItems', cartItems);
     let totalPrice = cartItems
       ? cartItems.reduce(
           (accum, cur) => accum + +cur.product.price * cur.quantity,
