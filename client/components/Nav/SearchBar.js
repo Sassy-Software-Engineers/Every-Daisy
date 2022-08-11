@@ -67,6 +67,7 @@ export class SearchBar extends React.Component {
       </Container>
     </Navbar>
     <InputGroup className="col-6">
+      <ListGroup>
           <FormControl
             placeholder="Search for products"
             aria-label="Search"
@@ -92,7 +93,8 @@ export class SearchBar extends React.Component {
               ""
             )}
           </div>
-          <Button variant="outline-secondary" id="button-addon2" onClick={handleClick}>
+      </ListGroup>
+          <Button variant="outline-secondary" onClick={handleClick}className="search-btn">
             Search
           </Button>
     </InputGroup>

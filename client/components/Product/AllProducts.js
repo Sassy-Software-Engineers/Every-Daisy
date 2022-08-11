@@ -22,7 +22,7 @@ export class AllProducts extends React.Component {
 
   handleChange(e) {
     this.setState({
-      value: e.target.value,
+      filter: e
     });
   }
   handleClick(e) {
@@ -45,15 +45,15 @@ export class AllProducts extends React.Component {
         </h1>
 
         <div className="category-filter">
-          <Dropdown onChange={this.handleChange}>
+          <Dropdown onSelect={this.handleChange}>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Filter
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item value="all">Show All</Dropdown.Item>
+              <Dropdown.Item eventKey="all">Show All</Dropdown.Item>
               {categories.map((category) => {
                 return (
-                  <Dropdown.Item key={category.id} value={category.name}>
+                  <Dropdown.Item key={category.id} eventKey={category.name}>
                     {category.name}
                   </Dropdown.Item>
                 );
@@ -62,14 +62,18 @@ export class AllProducts extends React.Component {
           </Dropdown>
         </div>
 
+
         {
           // might need to change to fit whatever the path to the product's categories is
           // EVERY product should have a category
+          
           products
             .filter((product) => {
-              if (currentFilter === 'all' || product.categories.includes(currentFilter)) return product;
+              console.log("product:", product, "currentFilter:", currentFilter)
+              if (currentFilter === 'all'|| product.categories.includes(currentFilter)) return product;
             })
             .map((product) => {
+              // console.log("product:", product)
               let averageRating = Math.floor(
                 product.reviews.reduce((accum, cur) => {
                   return cur.starRating + accum;
