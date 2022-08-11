@@ -75,21 +75,23 @@ export class SearchBar extends React.Component {
             value={this.state.search}
             onChange={updateSearch}
           />
-          {this.state.search != 0 ? (
-            <ul>
-              {filteredProducts.map((product) => {
-                  return (
-                    <ListGroup key={product.id}>
-                      <ListGroupItem key={product.id} value={product.title} as={NavLink} to={`/products/${product.id}`}>
-                        {product.title}
-                      </ListGroupItem>
-                    </ListGroup>
-                  );
-              })}
-            </ul>
-          ) : (
-            ""
-          )}
+          <div>
+            {this.state.search != 0 ? (
+              <ul>
+                {filteredProducts.map((product) => {
+                    return (
+                      <ListGroup key={product.id}>
+                        <ListGroupItem key={product.id} value={product.title} as={NavLink} to={`/products/${product.id}`}>
+                          {product.title}
+                        </ListGroupItem>
+                      </ListGroup>
+                    );
+                })}
+              </ul>
+            ) : (
+              ""
+            )}
+          </div>
           <Button variant="outline-secondary" id="button-addon2" onClick={handleClick}>
             Search
           </Button>
