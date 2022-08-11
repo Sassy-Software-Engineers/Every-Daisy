@@ -4,15 +4,9 @@ import { connect } from 'react-redux';
 import OrderList from './Order/OrderList';
 
 export class BPIndex extends React.Component {
-    componentDidMount() {
-
-    }
-
-    render() {
-        return (
-            <OrderList />    
-        );
-    }
+  render() {
+    return <OrderList />;
+  }
 }
 
 export default BPIndex;
