@@ -39,10 +39,11 @@ export class SearchBar extends React.Component {
             <Nav.Link as={NavLink} to={isLoggedIn ? `/users/${this.props.id}` : '/home'}>Account</Nav.Link>
             {isLoggedIn ? 
             <Nav.Link onClick={handleClick}>Logout</Nav.Link>:
-            <div>
               <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+            }
+                {isLoggedIn ? 
+              '':
               <Nav.Link as={NavLink} to="/signup">Signup</Nav.Link>
-            </div>
             }
           </Nav>
         </Navbar.Collapse>
