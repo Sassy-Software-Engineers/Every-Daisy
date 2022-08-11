@@ -70,6 +70,22 @@ export const setCartRemove = (product) => async (dispatch) => {
   }
 };
 
+export const setOrder = () => async (dispatch) => {
+  try {
+    const token = window.localStorage.getItem(TOKEN);
+    const cookie = window.localStorage.getItem(COOKIE);
+    const { data } = await axios.post('/api/cart/createOrder', null, {
+      headers: {
+        authorization: token,
+        device: cookie,
+      },
+    });
+    return dispatch(setCart(data));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 /**
  * REDUCER
  */

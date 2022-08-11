@@ -13,6 +13,7 @@ import allReviews from './reviews/reviews';
 import allOrders from './orders/allOrders';
 import singleOrder from './orders/singleOrder';
 
+import checkout from './checkout/checkout'
 const reducer = combineReducers({
   auth,
   singleProduct,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   allCategories,
   allReviews,
   allOrders,
+  checkout
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
