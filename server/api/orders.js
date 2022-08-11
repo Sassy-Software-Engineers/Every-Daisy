@@ -11,17 +11,24 @@ router.post('/', requireToken, isAdmin, async (req, res, next) => {
     catch (e) { next(e) }
 });
 
-router.get('/', requireToken, isAdmin, async (req, res, next) => {
+router.get('/', requireToken, async (req, res, next) => {
     try {
-        const orders = await Order
-            .findAll({
-                include: {
-                    model: User,
-                    as: 'user',
-                    attributes: ['username']
-                }
-            });
-        res.json(orders);
+        if (req.user.isAdmin) {
+            const orders = await Order
+                .findAll({
+                    include: {
+                        model: User,
+                        as: 'user',
+                        attributes: ['username']
+                    }
+                });
+            res.json(orders);
+        }
+        else {
+            const orders = await Order
+                .findAll({ where: { userId: req.user.id } });
+            res.json(orders);
+        }
     }
     catch (e) { next(e) }
 });
