@@ -1,0 +1,23 @@
+.cart{
+    margin:auto !important;
+    text-align: center !important;
+}
+.cart Button {
+    margin-right: 5px !important;
+}
+.cart .card{
+    display:flex;
+    flex-direction: row !important;
+    color:#6b8f71ff !important;
+    width:80%;
+    margin-bottom:4px;
+    padding:10px
+}
+.cart .title {
+    text-decoration:none !important;
+    color:#f1bb87ff !important;
+}
+.cart a {
+    text-decoration: none !important;
+}
+
