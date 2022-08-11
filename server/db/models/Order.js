@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 const CartItem = require('./CartItem');
 const Product = require('./Product');
+const User = require('./User');
 
 const Order = db.define('order', {
   quantity: {
@@ -18,18 +19,20 @@ const Order = db.define('order', {
 module.exports = Order;
 
 Order.prototype.itemized = async function() {
-  return await Order.findByPk(this.id, {
+  const order = await Order.findByPk(this.id, {
     include: {
       model: CartItem,
       include: { model: Product }
     },
   });
+  order.total = await order.getTotal();
+  return order;
 };
 
 Order.prototype.getTotal = async function() {
-  const receipt = await this.itemized();
+  const items = await CartItem.findAll({where: {orderId: this.id}});
   let total = 0;
-  for (let item of receipt.cartItems) {
+  for (let item of items) {
     total += item.price * item.quantity;
   }
   return total;

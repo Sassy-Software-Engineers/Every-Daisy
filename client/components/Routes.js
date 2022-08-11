@@ -29,6 +29,7 @@ class Routes extends Component {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/backpanel" component={BPIndex} />
           <Route path="/home">
             <Redirect to="/" />
           </Route>
