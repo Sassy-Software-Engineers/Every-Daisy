@@ -15,7 +15,7 @@
 
 .search-bar-container img {
     height:40px;
-    width:40px
+    width:40px !important
 }
 
 .search-bar-container.search-btn {
