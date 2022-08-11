@@ -63,7 +63,7 @@ export class Checkout extends React.Component {
             ) : (
               <div>Loading!</div>
             )}
-            <p>TOTAL: {totalPrice}</p>
+            <p>TOTAL: {totalPrice.toFixed(2)}</p>
           </div>
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm />

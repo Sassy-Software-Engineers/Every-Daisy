@@ -9,7 +9,7 @@ import AllProducts from './Product/AllProducts';
 import SingleProduct from './Product/SingleProduct';
 import Cart from './Cart';
 import Cookie from './Auth/Cookie';
-import Checkout from './Checkout/Checkout';
+import Checkout from './Checkout/CheckoutOld';
 import CheckoutStripe from './Checkout/CheckoutStripe';
 import CheckoutForm from './Checkout/CheckoutForm';
 import Confirmation from './Checkout/Confirmation';
