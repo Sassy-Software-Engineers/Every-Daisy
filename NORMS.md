@@ -1,7 +1,5 @@
 ## Group Norms:
 
-[example](https://github.com/FullstackAcademy/2206-GHP-RM-WEB-FT/blob/main/03-senior-phase/team-contract-example.pdf)
-
 #### Roles
 
 - GitMaster
