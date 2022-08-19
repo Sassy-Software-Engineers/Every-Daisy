@@ -1,24 +1,30 @@
-.search-bar-container{
-    margin:auto;
-    text-align: center;
+.search-bar-container {
+  margin: auto;
+  text-align: center;
 }
 .search-bar-container h1 {
-    color: #6b8f71ff;
+  color: #6b8f71ff;
+  max-width: 100%;
 }
 * {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 300;
-    }
-    h1, h2, h3, h4, h5, h6 {
-    font-weight: 500;
-    }
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
 
 .search-bar-container img {
-    height:40px;
-    width:40px !important
+  height: 40px;
+  width: 40px !important;
 }
 
 .search-bar-container.search-btn {
-    max-height:40px!important;
-    width:40px!important
+  max-height: 40px !important;
+  width: 40px !important;
 }
