@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { Container, ThemeProvider } from 'react-bootstrap';
+import SearchBar from './components/Nav/SearchBar';
+import Routes from './components/Routes';
 
-import Navbar from './components/Navbar'
-import Routes from './Routes'
+const App = () => (
+  <Container fluid>
+    <SearchBar />
+    <Routes />
+  </Container>
+);
 
-const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Routes />
-    </div>
-  )
-}
-
-export default App
+export default App;

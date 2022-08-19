@@ -8,8 +8,7 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
@@ -18,6 +17,13 @@ module.exports = {
             '@babel/preset-react'
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   }

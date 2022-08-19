@@ -1,11 +1,12 @@
 //this is the access point for all things database related!
 
-const db = require('./db');
+const db = require('./db'); //database
 const User = require('./models/User');
 const Product = require('./models/Product');
 const Review = require('./models/Review');
 const Order = require('./models/Order');
 const Category = require('./models/Category');
+const CartItem = require('./models/CartItem');
 
 User.hasMany(Order);
 Order.belongsTo(User);
@@ -19,6 +20,10 @@ Product.hasMany(Review);
 Category.belongsToMany(Product, { through: 'product_categories' });
 Product.belongsToMany(Category, { through: 'product_categories' });
 
+CartItem.belongsTo(Product);
+CartItem.belongsTo(Order);
+Order.hasMany(CartItem);
+
 module.exports = {
   db,
   models: {
@@ -27,5 +32,6 @@ module.exports = {
     Product,
     Review,
     Category,
+    CartItem,
   },
 };

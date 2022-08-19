@@ -10,5 +10,8 @@ const Category = db.define('category', {
     },
   },
 });
+Category.prototype.addProduct = function () {
+  this.addProduct(productId);
+};
 
 module.exports = Category;

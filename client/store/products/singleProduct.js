@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+const TOKEN = 'token';
 /**
  * ACTION TYPES
  */
 const GET_PRODUCT = 'GET_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+const ADD_REVIEW = 'ADD_REVIEW';
 /**
  * ACTION CREATORS
  */
@@ -15,6 +17,10 @@ const setProduct = (product) => ({
 const updatedProduct = (product) => ({
   type: UPDATE_PRODUCT,
   product,
+});
+const addReview = (review) => ({
+  type: ADD_REVIEW,
+  review,
 });
 
 /**
@@ -28,11 +34,31 @@ export const fetchProduct = (id) => {
   };
 };
 export const updateProduct = (product) => {
+  const token = window.localStorage.getItem(TOKEN);
+
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/products/${product.id}`, product);
+    const { data } = await axios.put(`/api/products/${product.id}`, product, {
+      headers: { authorization: token },
+    });
     dispatch(updatedProduct(data));
   };
 };
+export const addNewReview = (productId, review) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.post(`/api/products/${productId}`, review, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(addReview(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+/*
 
 /**
  * REDUCER
@@ -43,6 +69,8 @@ export default function (state = {}, action) {
       return action.product;
     case UPDATE_PRODUCT:
       return { ...action.product };
+    case ADD_REVIEW:
+      return { ...state, reviews: [...state.reviews, action.review] };
     default:
       return state;
   }
